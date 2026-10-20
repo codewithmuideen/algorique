@@ -5,7 +5,7 @@ import { FaWhatsapp, FaInstagram, FaFacebookF, FaTiktok, FaLinkedinIn, FaXTwitte
 import { Logo } from '../layout/Logo'
 import { site, nav } from '../../data/site'
 import { services } from '../../data/content'
-import { whatsappUrl } from '../../lib/whatsapp'
+import { whatsappUrl, hasWhatsapp } from '../../lib/whatsapp'
 import { openConsentSettings } from '../../lib/consent'
 import { EASE } from '../../lib/motion'
 
@@ -39,7 +39,9 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Logo variant="dark" className="h-10 sm:h-12" />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-ivory/65">
-              Careful cleaning for homes, rentals and workplaces, done to a checklist you can see.
+              {site.promise} Professional cleaning for homes, properties and businesses across Dartford, Bexley and London.
+            </p>
+            <p className="mt-4 text-sm font-semibold tracking-[0.12em] text-lime uppercase">{site.slogan}
             </p>
             <div className="mt-8 space-y-2">
               {site.email.startsWith('[') ? (
@@ -58,15 +60,17 @@ export function Footer() {
               )}
             </div>
             <div className="mt-8 flex flex-wrap gap-2">
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="grid size-11 place-items-center rounded-full border border-ivory/20 transition hover:border-lime hover:bg-lime hover:text-ink"
-                aria-label="WhatsApp"
-              >
-                <FaWhatsapp className="size-5" aria-hidden />
-              </a>
+              {hasWhatsapp && (
+                <a
+                  href={whatsappUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="grid size-11 place-items-center rounded-full border border-ivory/20 transition hover:border-lime hover:bg-lime hover:text-ink"
+                  aria-label="WhatsApp"
+                >
+                  <FaWhatsapp className="size-5" aria-hidden />
+                </a>
+              )}
               {socials.map(([key, url]) => {
                 const [Icon, label] = socialIcons[key]
                 return (

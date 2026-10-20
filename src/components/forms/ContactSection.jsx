@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mail, Phone, Clock, ArrowRight, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react'
-import { FaWhatsapp } from 'react-icons/fa6'
+import { Mail, Phone, Clock, Globe, MapPin, ArrowRight, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { contactSchema, contactSubjects } from '../../lib/schemas'
-import { whatsappUrl } from '../../lib/whatsapp'
-import { site } from '../../data/site'
+import { ChatButton } from './ChatButton'
+import { site, isPlaceholder } from '../../data/site'
 import { Field } from './fields'
 import { SplitLines } from '../animation/SplitLines'
 import { Reveal } from '../animation/Reveal'
@@ -55,10 +54,12 @@ export function ContactSection() {
   })
 
   const details = [
-    { icon: Mail, label: 'Email', value: site.email, href: site.email.startsWith('[') ? null : `mailto:${site.email}` },
+    { icon: Mail, label: 'Email', value: site.email, href: `mailto:${site.email}` },
     { icon: Phone, label: 'Phone', value: site.phone, href: site.phoneHref || null },
+    { icon: Globe, label: 'Website', value: site.url.replace(/^https?:[/][/]/, ''), href: site.url },
+    { icon: MapPin, label: 'Areas', value: site.areas.map((a) => a.name).join(', ') },
     { icon: Clock, label: 'Hours', value: site.hours },
-  ]
+  ].filter((d) => !isPlaceholder(d.value))
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="bg-mist py-24 sm:py-32">
@@ -100,9 +101,7 @@ export function ContactSection() {
                 </li>
               ))}
             </ul>
-            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="btn btn-ink mt-8">
-              <FaWhatsapp className="size-5 text-lime" aria-hidden /> Message us on WhatsApp
-            </a>
+            <ChatButton className="btn btn-ink mt-8" iconClassName="size-5 text-lime" label={{ whatsapp: 'Message us on WhatsApp' }} />
           </Reveal>
         </div>
 

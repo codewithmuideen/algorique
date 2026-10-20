@@ -1,11 +1,10 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { FaWhatsapp } from 'react-icons/fa6'
 import { images } from '../../data/images'
 import { SplitLines } from '../animation/SplitLines'
 import { Reveal } from '../animation/Reveal'
-import { whatsappUrl } from '../../lib/whatsapp'
+import { ChatButton } from '../forms/ChatButton'
 import { useBooking } from '../booking/BookingContext'
 
 // The photograph's frame opens to full width as the section scrolls in.
@@ -55,9 +54,7 @@ export function FinalCta() {
                 Book a Cleaning
                 <ArrowUpRight className="size-5 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
               </button>
-              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-light min-h-14 px-7">
-                <FaWhatsapp className="size-5" aria-hidden /> WhatsApp
-              </a>
+              <ChatButton className="btn btn-ghost-light min-h-14 px-7" />
             </div>
           </Reveal>
         </div>

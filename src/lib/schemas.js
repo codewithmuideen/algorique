@@ -35,7 +35,7 @@ export const bookingSchema = z
     website: z.string().max(0).optional().default(''), // honeypot: must stay empty
   })
   .superRefine((data, ctx) => {
-    const residential = data.propertyType === 'Flat / apartment' || data.propertyType === 'House'
+    const residential = bookingOptions.residentialTypes.includes(data.propertyType)
     if (residential && !data.bedrooms) {
       ctx.addIssue({ code: 'custom', path: ['bedrooms'], message: 'Please choose the number of bedrooms.' })
     }

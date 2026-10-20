@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CalendarCheck, ClipboardCheck, Repeat, ReceiptText, Check, ArrowUpRight } from 'lucide-react'
+import { CalendarCheck, ClipboardCheck, Repeat, ReceiptText, MapPin, Check, ArrowUpRight } from 'lucide-react'
 import { reasons } from '../../data/content'
 import { images } from '../../data/images'
 import { SplitLines } from '../animation/SplitLines'
 import { Reveal, RevealGroup, RevealItem } from '../animation/Reveal'
 import { MaskImage } from '../animation/MaskImage'
 
-const icons = { calendar: CalendarCheck, clipboard: ClipboardCheck, repeat: Repeat, receipt: ReceiptText }
+const icons = { calendar: CalendarCheck, clipboard: ClipboardCheck, repeat: Repeat, receipt: ReceiptText, map: MapPin }
 
 export function WhyUs({ showLink = true }) {
   return (

@@ -10,8 +10,8 @@ export default function Terms() {
       title: 'About these terms',
       body: (
         <p>
-          These terms apply when you use this website and when you book a cleaning service with {site.legalName}, trading as{' '}
-          {site.name}. Please read them before requesting a booking. Nothing in these terms affects your legal rights as a
+          These terms apply when you use this website and when you book a cleaning service with{' '}
+          {site.legalName === site.name ? site.name : `${site.legalName}, trading as ${site.name}`}. Please read them before requesting a booking. Nothing in these terms affects your legal rights as a
           consumer.
         </p>
       ),

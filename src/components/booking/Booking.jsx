@@ -4,11 +4,12 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Check, Clock, CalendarCheck, CreditCard, Loader2, PencilLine, AlertCircle } from 'lucide-react'
-import { FaWhatsapp } from 'react-icons/fa6'
 import { services, bookingOptions } from '../../data/content'
 import { images } from '../../data/images'
 import { bookingSchema, bookingSteps, serviceTitle } from '../../lib/schemas'
-import { whatsappUrl, bookingWhatsappMessage, formatDate } from '../../lib/whatsapp'
+import { whatsappUrl, hasWhatsapp, bookingWhatsappMessage, formatDate } from '../../lib/whatsapp'
+import { site } from '../../data/site'
+import { ChatButton } from '../forms/ChatButton'
 import { Field, Chips } from '../forms/fields'
 import { SplitLines } from '../animation/SplitLines'
 import { Reveal } from '../animation/Reveal'
@@ -32,7 +33,7 @@ const defaults = {
   website: '',
 }
 
-const isResidential = (type) => type === 'Flat / apartment' || type === 'House'
+const isResidential = (type) => bookingOptions.residentialTypes.includes(type)
 
 const todayIso = () => {
   const d = new Date()
@@ -176,13 +177,17 @@ export function Booking() {
             </div>
 
             <div className="mt-8 rounded-[24px] border border-ivory/15 p-6">
-              <p className="font-semibold">Prefer to chat?</p>
+              <p className="font-semibold">{hasWhatsapp ? 'Prefer to chat?' : 'Prefer to talk?'}</p>
               <p className="mt-1 text-sm text-ivory/65">
-                Open WhatsApp with a short summary of your choices so far. You review it and decide whether to send it.
+                {hasWhatsapp
+                  ? 'Open WhatsApp with a short summary of your choices so far. You review it and decide whether to send it.'
+                  : 'Call us and we will take your booking request over the phone.'}
               </p>
-              <a href={whatsappUrl(waMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-light mt-4 w-full">
-                <FaWhatsapp className="size-5" aria-hidden /> Continue on WhatsApp
-              </a>
+              <ChatButton
+                message={waMessage}
+                className="btn btn-ghost-light mt-4 w-full"
+                label={{ whatsapp: 'Continue on WhatsApp' }}
+              />
             </div>
           </div>
         </div>
@@ -235,9 +240,15 @@ export function Booking() {
                           <p className="mt-1">{serverError}</p>
                           <p className="mt-1">
                             You can try again, or{' '}
-                            <a className="font-semibold underline" href={whatsappUrl(waMessage)} target="_blank" rel="noopener noreferrer">
-                              send it on WhatsApp
-                            </a>{' '}
+                            {hasWhatsapp ? (
+                              <a className="font-semibold underline" href={whatsappUrl(waMessage)} target="_blank" rel="noopener noreferrer">
+                                send it on WhatsApp
+                              </a>
+                            ) : (
+                              <a className="font-semibold underline" href={site.phoneHref}>
+                                call us on {site.phone}
+                              </a>
+                            )}{' '}
                             instead.
                           </p>
                         </div>
@@ -540,9 +551,7 @@ function Success({ name, waMessage, onReset }) {
         <button type="button" onClick={onReset} className="btn btn-ink">
           Make another request
         </button>
-        <a href={whatsappUrl(waMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-dark">
-          <FaWhatsapp className="size-5" aria-hidden /> Follow up on WhatsApp
-        </a>
+        <ChatButton message={waMessage} className="btn btn-ghost-dark" label={{ whatsapp: 'Follow up on WhatsApp' }} />
       </div>
     </div>
   )

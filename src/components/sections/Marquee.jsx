@@ -16,7 +16,7 @@ const wrap = (min, max, v) => {
   return ((((v - min) % range) + range) % range) + min
 }
 
-const words = ['Regular cleaning', 'Deep cleans', 'End of tenancy', 'Offices', 'Carpets & upholstery', 'After builders']
+const words = ['Residential', 'End of tenancy', 'Commercial', 'Airbnb & short-let', 'Deep cleaning', 'After builders']
 const thumbs = [images.lemonSpray, images.vacuumCarpet, images.gloveSpray]
 
 // A band of services that drifts on its own and speeds up (or reverses)

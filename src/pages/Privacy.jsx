@@ -13,7 +13,8 @@ export default function Privacy() {
       body: (
         <>
           <p>
-            This website is operated by {site.legalName}, trading as {site.name} (“we”, “us”, “our”). We are the controller
+            This website is operated by{' '}
+            {site.legalName === site.name ? site.name : `${site.legalName}, trading as ${site.name}`} (“we”, “us”, “our”). We are the controller
             of the personal information you give us through this website.
           </p>
           <p>

@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, Search } from 'lucide-react'
-import { FaWhatsapp } from 'react-icons/fa6'
+import { MapPin, Search, MessageCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { site } from '../../data/site'
 import { SplitLines } from '../animation/SplitLines'
 import { Reveal, RevealGroup, RevealItem } from '../animation/Reveal'
-import { whatsappUrl } from '../../lib/whatsapp'
 import { EASE } from '../../lib/motion'
 
-const normalise = (v) => v.toUpperCase().replace(/\s+/g, '')
+const normalise = (v) => v.toUpperCase().replace(/[^A-Z0-9]/g, '')
+// 'DA1 2AB' or 'DA12AB' gives 'DA1'; a district on its own is used as-is.
+const outwardCode = (q) => (q.length >= 5 && /[0-9][A-Z]{2}$/.test(q) ? q.slice(0, -3) : q)
+// 'SE' matches any SE district (SE1, SE28...); 'DA1' only matches DA1.
+const covers = (code, prefix) => (/^[A-Z]+$/.test(prefix) ? new RegExp('^' + prefix + '[0-9]').test(code) : code === prefix)
 
 export function Areas() {
   const [query, setQuery] = useState('')
@@ -19,7 +22,8 @@ export function Areas() {
     e.preventDefault()
     const q = normalise(query)
     if (!q) return
-    const match = site.areas.find((a) => a.prefixes.some((p) => q.startsWith(normalise(p))))
+    const code = outwardCode(q)
+    const match = site.areas.find((a) => a.prefixes.some((p) => covers(code, normalise(p))))
     setResult(match ? { ok: true, area: match.name } : { ok: false })
   }
 
@@ -80,10 +84,14 @@ export function Areas() {
                           <>Good news, that looks like part of {result.area}.</>
                         ) : (
                           <>
-                            We could not match that postcode.{' '}
-                            <a className="text-forest underline underline-offset-4" href={whatsappUrl('Hello, do you cover my area? My postcode starts with ' + query.toUpperCase())} target="_blank" rel="noopener noreferrer">
-                              Ask us on WhatsApp
-                            </a>
+                            That postcode is outside our usual areas, but we may still be able to help.{' '}
+                            <a className="text-forest underline underline-offset-4" href={site.phoneHref}>
+                              Call {site.phone}
+                            </a>{' '}
+                            or{' '}
+                            <Link className="text-forest underline underline-offset-4" to="/contact">
+                              send us a message
+                            </Link>
                             .
                           </>
                         )}
@@ -108,14 +116,12 @@ export function Areas() {
             </RevealItem>
           ))}
           <RevealItem as="li">
-            <a
-              href={whatsappUrl('Hello, do you cover my area?')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="flex items-center gap-2.5 rounded-full bg-lime px-5 py-3.5 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-lime"
             >
-              <FaWhatsapp className="size-4" aria-hidden /> Not listed? Ask us
-            </a>
+              <MessageCircle className="size-4" aria-hidden /> Not listed? Ask us
+            </Link>
           </RevealItem>
         </RevealGroup>
       </div>

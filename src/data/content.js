@@ -124,10 +124,10 @@ export const reasons = [
     points: ['Agreed arrival windows', 'Advance notice of any change'],
   },
   {
-    icon: 'clipboard',
-    title: 'Checked, not just cleaned',
-    body: 'Every visit follows a documented checklist, backed by quality inspections and your feedback.',
-    points: ['Documented checklists', 'Quality inspections'],
+    icon: 'map',
+    title: 'Local to you',
+    body: 'Professional cleaning for homes, properties and businesses across Dartford, Bexley and London.',
+    points: ['Dartford, Bexley and London', 'Homes, lets and businesses'],
   },
   {
     icon: 'repeat',
@@ -221,7 +221,9 @@ export const gallery = [
 ]
 
 export const bookingOptions = {
-  propertyTypes: ['Flat / apartment', 'House', 'Office / commercial', 'Other'],
+  propertyTypes: ['Flat / apartment', 'House', 'Airbnb / short-let', 'Office / commercial', 'Other'],
+  // Property types that ask for bedrooms and bathrooms.
+  residentialTypes: ['Flat / apartment', 'House', 'Airbnb / short-let'],
   bedrooms: ['Studio', '1', '2', '3', '4', '5', '6+'],
   bathrooms: ['1', '2', '3', '4', '5+'],
   times: ['Morning (8am to 12pm)', 'Afternoon (12pm to 4pm)', 'Evening (4pm to 7pm)', 'Flexible'],

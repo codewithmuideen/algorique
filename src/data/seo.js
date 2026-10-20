@@ -3,27 +3,26 @@
 // write a static HTML file per route (see vite.config.js), so crawlers and link
 // previews see the right tags without running JavaScript.
 // Imports use explicit .js extensions because Node loads this file at build time.
-import { site } from './site.js'
+import { site, isPlaceholder } from './site.js'
 import { services, faqs } from './content.js'
 
-const isPlaceholder = (v) => !v || /^\[.*\]$/.test(String(v).trim())
 
 export const routes = [
   {
     path: '/',
-    title: 'Algorique Cleaners | Home, Office and End-of-Tenancy Cleaning',
+    title: 'Algorique Cleaners | Cleaning Services in Dartford, Bexley & London',
     description:
-      'Careful, checklist-led cleaning for homes, rentals and workplaces: regular and deep cleans, end-of-tenancy, office, carpet and after-builders cleaning. Request a booking online.',
-    heading: 'Spotless spaces for homes and workplaces',
+      'Professional cleaning for homes, properties and businesses in Dartford, Bexley and London: residential, end-of-tenancy, commercial, Airbnb, deep and after-builders cleaning. Call 020 8123 4567.',
+    heading: 'Professional cleaning services in Dartford, Bexley and London',
     image: '/og-image.jpg',
     priority: '1.0',
   },
   {
     path: '/services',
     name: 'Services',
-    title: 'Cleaning Services | Algorique Cleaners',
+    title: 'Cleaning Services in Dartford, Bexley & London | Algorique Cleaners',
     description:
-      'Regular home cleaning, deep cleaning, end-of-tenancy, office and commercial, carpet and upholstery, and after-builders cleaning. Book a one-off or recurring clean.',
+      'Residential, end-of-tenancy, commercial, Airbnb and short-let, deep and after-builders cleaning across Dartford, Bexley and London. One-off or recurring.',
     heading: 'Cleaning that fits your life',
     image: '/images/kitchen-island.jpg',
     priority: '0.9',
@@ -31,9 +30,9 @@ export const routes = [
   {
     path: '/book',
     name: 'Book a cleaning',
-    title: 'Book a Cleaning | Algorique Cleaners',
+    title: 'Book a Cleaning in Dartford, Bexley & London | Algorique Cleaners',
     description:
-      'Request a cleaning in a couple of minutes. Choose your service, property details and preferred date, and we will confirm availability with you personally.',
+      'Request a clean in a couple of minutes. Choose your service, property details and preferred date, and we will confirm availability with you personally.',
     heading: 'Request your cleaning',
     image: '/images/team/kitchen-wipe.jpg',
     priority: '0.9',
@@ -43,7 +42,7 @@ export const routes = [
     name: 'About',
     title: 'About Us | Algorique Cleaners',
     description:
-      'Who we are and how we work: written room-by-room checklists, the right products for every surface, and a team that takes pride in the finish.',
+      'The formula for a cleaner, brighter space: vetted, trained cleaners, professional eco-friendly products, and a proven process of checklists and quality inspections.',
     heading: 'Careful people, checked work',
     image: '/images/team/team-living-room.jpg',
     priority: '0.7',
@@ -70,8 +69,8 @@ export const routes = [
   {
     path: '/contact',
     name: 'Contact',
-    title: 'Contact Us | Algorique Cleaners',
-    description: 'Get in touch for quotes, questions about a service, or help with a booking. See the areas we cover.',
+    title: 'Contact Us | Algorique Cleaners, Dartford, Bexley & London',
+    description: 'Call 020 8123 4567 or email hello@algoriquecleaners.co.uk for quotes and bookings. We cover Dartford, Bexley and London.',
     heading: 'Let us know how we can help',
     image: '/images/team/cleaner-smiling.jpg',
     priority: '0.8',
@@ -138,11 +137,22 @@ export function jsonLd(route, base) {
     logo: `${base}/brand/logo-color.png`,
     image: `${base}/og-image.jpg`,
     description: routes[0].description,
+    slogan: site.slogan,
   }
   if (!isPlaceholder(site.email)) business.email = site.email
   if (site.phoneHref) business.telephone = site.phoneHref.replace(/^tel:/, '')
+  if (business.telephone || business.email) {
+    business.contactPoint = {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      areaServed: 'GB',
+      availableLanguage: 'English',
+      ...(business.telephone && { telephone: business.telephone }),
+      ...(business.email && { email: business.email }),
+    }
+  }
   const areas = site.areas.map((a) => a.name).filter((n) => !isPlaceholder(n))
-  if (areas.length) business.areaServed = areas.map((name) => ({ '@type': 'Place', name }))
+  if (areas.length) business.areaServed = areas.map((name) => ({ '@type': 'City', name }))
   const sameAs = Object.values(site.social).filter(Boolean)
   if (sameAs.length) business.sameAs = sameAs
   business.makesOffer = services.map((s) => ({

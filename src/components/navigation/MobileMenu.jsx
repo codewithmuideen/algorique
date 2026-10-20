@@ -2,10 +2,9 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { X, ArrowUpRight } from 'lucide-react'
-import { FaWhatsapp } from 'react-icons/fa6'
 import { Logo } from '../layout/Logo'
 import { nav, site } from '../../data/site'
-import { whatsappUrl } from '../../lib/whatsapp'
+import { ChatButton } from '../forms/ChatButton'
 import { EASE } from '../../lib/motion'
 import { useLockBody } from '../../hooks'
 
@@ -99,10 +98,11 @@ export function MobileMenu({ onClose }) {
         <Link to="/book" onClick={onClose} className="btn btn-lime w-full">
           Book a Cleaning <ArrowUpRight className="size-4" aria-hidden />
         </Link>
-        <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-light w-full">
-          <FaWhatsapp className="size-5" aria-hidden /> Chat on WhatsApp
+        <ChatButton className="btn btn-ghost-light w-full" />
+        <a href={`mailto:${site.email}`} className="pt-3 text-center text-sm text-ivory/60">
+          {site.email}
         </a>
-        <p className="pt-3 text-center text-xs text-ivory/50">{site.hours}</p>
+        {site.hours && <p className="text-center text-xs text-ivory/50">{site.hours}</p>}
       </motion.div>
     </motion.div>
   )

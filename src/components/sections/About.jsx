@@ -63,7 +63,7 @@ function RotatingBadge() {
 const principles = [
   ['Written checklists', 'Room-by-room, agreed with you, followed every visit.'],
   ['Care for your surfaces', 'The right method for stone, timber, glass and fabric.'],
-  ['Clear communication', 'Easy to reach by phone, email or WhatsApp.'],
+  ['Clear communication', 'Easy to reach on 020 8123 4567 or by email, before and after every visit.'],
 ]
 
 export function About({ showLink = false }) {
@@ -85,9 +85,9 @@ export function About({ showLink = false }) {
           <div className="flex flex-col justify-between gap-10 lg:col-span-4 lg:pt-24">
             <Reveal delay={0.1}>
               <p className="text-lg leading-relaxed text-stone">
-                Algorique Cleaners looks after homes, rentals and workplaces. From a weekly tidy to a full move-out reset, the
-                standard comes from a written checklist, the right products for each surface, and people who take pride in a
-                finish you notice the moment you walk in.
+                Algorique Cleaners provides professional cleaning for homes, properties and businesses across Dartford, Bexley
+                and London. From a weekly tidy to an Airbnb turnover or a full move-out reset, the standard comes from vetted,
+                trained people, professional eco-friendly products and a proven process of checklists and quality inspections.
               </p>
             </Reveal>
             <RevealGroup as="ul" className="divide-y divide-ink/10 border-y border-ink/10">
