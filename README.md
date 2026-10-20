@@ -1,0 +1,124 @@
+# Algorique Cleaners website
+
+Marketing site and booking request flow for Algorique Cleaners.
+
+**Stack:** React 18 + Vite 6, Tailwind CSS 4, Framer Motion, React Router, React Hook Form + Zod, Lucide and React Icons. Contact and booking emails go through Resend, sent from two Vercel Functions. There is no database, CMS, user account or stored submission.
+
+## Run locally
+
+```bash
+npm install
+cp .env.example .env      # optional: add real Resend values to send test emails
+npm run dev               # http://localhost:5173
+npm run build             # production build into dist/
+npm run preview           # serve the production build
+```
+
+`npm run dev` also serves `/api/booking` and `/api/contact` through a small Vite middleware, so both forms work locally without the Vercel CLI. Without Resend variables, the forms show an honest "temporarily unavailable" error. They never report success unless the email was accepted for delivery.
+
+## Email setup (Resend)
+
+1. Create an account at [resend.com](https://resend.com).
+2. **Domains → Add domain** with the business domain, then add the DNS records Resend shows (SPF, DKIM and optionally DMARC) at your DNS provider. Wait until the domain shows **Verified**.
+3. **API Keys → Create** a key with "Sending access".
+4. In Vercel, open **Project → Settings → Environment Variables** and add:
+
+| Variable | Example | Purpose |
+| --- | --- | --- |
+| `RESEND_API_KEY` | `re_...` | Server-only API key |
+| `BUSINESS_EMAIL` | `bookings@your-domain.co.uk` | Inbox that receives requests (comma separate several) |
+| `VERIFIED_FROM_EMAIL` | `website@your-domain.co.uk` | Sender on the verified domain |
+| `PUBLIC_SITE_URL` | `https://www.your-domain.co.uk` | Shown in notification emails |
+
+These are server-side only. Never prefix them with `VITE_`, and never commit `.env`.
+
+Each notification is a branded HTML email with a plain-text fallback. Its reply-to is set to the customer's validated address, so replying goes straight to them. Every value is HTML-escaped, and both endpoints validate with the same Zod schemas as the browser, reject non-POST and oversized requests, and silently drop bots that fill the hidden honeypot field.
+
+## Deploy (Vercel)
+
+1. Push the project to a Git repository and import it in Vercel. The framework preset is **Vite**.
+2. Add the environment variables above, then deploy.
+3. `vercel.json` already handles client-side routing (`/privacy`, `/terms`, `/cookies`), security headers and long-term caching for images.
+4. Submit a real booking request and a real contact message to confirm both arrive.
+
+**Other hosts:** the `/api` files use the Vercel Node function signature `(req, res)`. For Netlify, move them to `netlify/functions/` and adapt them to the Netlify handler format.
+
+## Pages
+
+| Route | Contents |
+| --- | --- |
+| `/` | Hero, services carousel, how we work, why choose us, process, reviews |
+| `/services` | Full service list (each service has an anchor, e.g. `/services#deep`) |
+| `/about` | About, why choose us, gallery, areas covered |
+| `/process` | How booking works, how we work, FAQs |
+| `/reviews` | Reviews and gallery |
+| `/contact` | Contact form, areas covered, FAQs |
+| `/book` | Booking request wizard. `/book?service=deep` preselects a service |
+| `/faq`, `/privacy`, `/terms`, `/cookies` | FAQs and legal pages |
+
+The hero cut-out (`public/images/team/hero-cleaner-cutout.webp`) was made from the supplied clipboard photo with background removal. To use a different person, remove the background from a portrait photo and replace that file.
+
+## Placeholders to replace before launch
+
+Everything in `[BRACKETS]` is shown publicly until replaced.
+
+- **`src/data/site.js`**: email, phone (`phone` and `phoneHref`), opening hours, `whatsappNumber` (digits only, international format), social profile URLs (empty ones are hidden), service areas and postcode prefixes (the prefixes power the "Check your postcode" tool, which appears only once prefixes are added), legal company name, company number, registered address.
+- **`src/data/content.js`**:
+  - `reviews`: three placeholder entries, visibly labelled. Replace them with genuine customer reviews used with permission, and remove `placeholder: true`.
+  - `reasons`: add claims such as "Fully insured" or "Background-checked team" only once they are true.
+  - `gallery`: currently illustrative stock photography (labelled on the page). Replace it with real job photos. Add `before: images.someBefore` to an item to get a before/after comparison slider in the lightbox.
+- **Legal pages** (`src/pages/Privacy.jsx`, `Terms.jsx`, `Cookies.jsx`): fill in `[Date of publication]`, retention periods, hosting and email providers, payment terms, cancellation notice and charges, and the complaint window. These pages are a solid UK starting point, not legal advice, so have them reviewed before launch.
+- **Domain**: `public/robots.txt`, `public/sitemap.xml`, and the commented canonical tag in `index.html`.
+- **Structured data**: add `LocalBusiness` JSON-LD to `index.html` only once real business details (name, address, phone, areas) are confirmed.
+
+## Images
+
+All image references live in `src/data/images.js`.
+
+- `public/images/team/`: the business's own photos, renamed descriptively. Two had a generator watermark in the bottom-right corner, which was cropped out (`kitchen-floor-scrub.jpg`, `sofa-upholstery.jpg`).
+- `public/images/`: Unsplash photography (free for commercial use), stored locally.
+
+To swap a photo, drop the new file in `public/images/` and update its entry in `images.js` (path, alt text, width, height). Images 1600px wide or more work best for full-width sections.
+
+## Brand
+
+- Logos are in `public/brand/`: `logo-color.png` for light backgrounds, `logo-dark-bg.png` (ivory and lime) for dark backgrounds, `logo-white.png`, and the "A" mark in forest and lime. `social-avatar.png` is sized for social profiles.
+- The favicon, Apple touch icon, 512px icon and the 1200×630 `og-image.jpg` sit in `public/`.
+- Colours: ink `#0E2A26`, forest `#1C6C54`, lime `#C8F252`, ivory `#F5F2EA`, paper `#FBFAF6`, mist `#E8EEE6`. They are defined as tokens in `src/styles/index.css`.
+- Type: Poppins throughout (300 to 700), self-hosted through Fontsource, so no third party is contacted on page load.
+
+## Cookies and analytics
+
+The cookie banner (`src/components/layout/CookieConsent.jsx`) is a wide bar at the bottom of the screen with Customise, Reject all and Accept all. Customise opens a preferences modal. It stores the visitor's choice in the first-party `algorique_consent` cookie for six months. **Cookie settings** in the footer and on the cookie policy page reopens the panel.
+
+No analytics are installed. To add a tool, load it only after consent:
+
+```js
+import { onConsent } from './lib/consent'
+onConsent('analytics', () => {
+  /* inject the analytics script here */
+})
+```
+
+Then list the tool's cookies in `src/pages/Cookies.jsx`.
+
+## Motion and accessibility
+
+- Motion follows one language throughout: expo-out easing, clip-path image reveals, line-by-line headline reveals, directional blur fades, a scroll-driven horizontal services track, a velocity-reactive marquee, and a scroll-scrubbed final CTA. It was modelled on the motion quality of the reference site, whose built bundle shows Framer Motion with an `[0.16, 1, 0.3, 1]` ease and clip-path inset reveals.
+- `MotionConfig reducedMotion="user"` respects the visitor's system setting. The horizontal services section switches to a swipe carousel on mobile and for reduced-motion users, so nobody is locked into scroll-driven movement.
+- Accessibility basics are covered: semantic landmarks, a skip link, visible focus states, keyboard-operable tabs, accordions, carousels, lightbox (arrow keys and Escape) and mobile menu (focus trap and Escape), labelled form fields with announced errors, and touch targets of 44px or more.
+
+## Project structure
+
+```
+api/                 Vercel Functions (booking.js, contact.js, _lib/email.js)
+public/              brand/, images/, favicon, robots.txt, sitemap.xml
+src/
+  components/        animation, booking, footer, forms, gallery, hero,
+                     layout, navigation, sections, services, testimonials
+  data/              site.js (business config), content.js, images.js
+  hooks/             shared hooks
+  lib/               schemas (shared with api), consent, scroll, whatsapp, motion
+  pages/             Home, Privacy, Terms, Cookies, NotFound
+  styles/            Tailwind theme and base styles
+```
