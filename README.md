@@ -38,7 +38,7 @@ Each notification is a branded HTML email with a plain-text fallback. Its reply-
 
 1. Push the project to a Git repository and import it in Vercel. The framework preset is **Vite**.
 2. Add the environment variables above, then deploy.
-3. `vercel.json` already handles client-side routing (`/privacy`, `/terms`, `/cookies`), security headers and long-term caching for images.
+3. `vercel.json` already sets clean URLs (each route is a prebuilt HTML file, see SEO), security headers and long-term caching for images.
 4. Submit a real booking request and a real contact message to confirm both arrive.
 
 **Other hosts:** the `/api` files use the Vercel Node function signature `(req, res)`. For Netlify, move them to `netlify/functions/` and adapt them to the Netlify handler format.
@@ -58,18 +58,27 @@ Each notification is a branded HTML email with a plain-text fallback. Its reply-
 
 The hero cut-out (`public/images/team/hero-cleaner-cutout.webp`) was made from the supplied clipboard photo with background removal. To use a different person, remove the background from a portrait photo and replace that file.
 
-## Placeholders to replace before launch
+## Business details and what is still to fill in
 
-Everything in `[BRACKETS]` is shown publicly until replaced.
+Real details are set in `src/data/site.js`: phone 020 8123 4567, hello@algoriquecleaners.co.uk, www.algoriquecleaners.co.uk, areas Dartford, Bexley and London (with postcode districts for the checker), and the brand lines. Empty or `[bracketed]` fields are hidden automatically.
 
-- **`src/data/site.js`**: email, phone (`phone` and `phoneHref`), opening hours, `whatsappNumber` (digits only, international format), social profile URLs (empty ones are hidden), service areas and postcode prefixes (the prefixes power the "Check your postcode" tool, which appears only once prefixes are added), legal company name, company number, registered address.
-- **`src/data/content.js`**:
-  - `reviews`: three placeholder entries, visibly labelled. Replace them with genuine customer reviews used with permission, and remove `placeholder: true`.
-  - `reasons`: add claims such as "Fully insured" or "Background-checked team" only once they are true.
-  - `gallery`: currently illustrative stock photography (labelled on the page). Replace it with real job photos. Add `before: images.someBefore` to an item to get a before/after comparison slider in the lightbox.
-- **Legal pages** (`src/pages/Privacy.jsx`, `Terms.jsx`, `Cookies.jsx`): fill in `[Date of publication]`, retention periods, hosting and email providers, payment terms, cancellation notice and charges, and the complaint window. These pages are a solid UK starting point, not legal advice, so have them reviewed before launch.
-- **Domain**: `public/robots.txt`, `public/sitemap.xml`, and the commented canonical tag in `index.html`.
-- **Structured data**: add `LocalBusiness` JSON-LD to `index.html` only once real business details (name, address, phone, areas) are confirmed.
+Still to complete before launch:
+
+- **`whatsappNumber`** in `site.js`: while empty, every WhatsApp button shows "Call 020 8123 4567" instead.
+- **`hours`**, **`social`** links, and **`legalName` / `companyNumber`** if trading as a limited company.
+- **Reviews** in `src/data/content.js`: three visibly labelled placeholders. Replace them with genuine reviews used with permission.
+- **Gallery**: illustrative stock photography (labelled on the page). Replace it with real job photos. Add `before` to an item for a before/after slider.
+- **Legal pages**: `[Date of publication]`, retention periods, hosting and email providers, payment terms, cancellation notice and complaint window. Have them reviewed before launch.
+- **Resend** environment variables (see Email setup).
+
+## SEO
+
+- One source of truth: `src/data/seo.js` holds the title, description, heading and share image for every route, plus the structured data. It includes a LocalBusiness with contact details, areas served and services, plus WebSite, WebPage, BreadcrumbList, an ItemList of services on `/services`, and FAQPage on `/faq`. Placeholder values are never output.
+- `seo-plugin.js` (a Vite plugin) writes a static HTML file per route at build time: `about.html`, `services.html` and so on. Each has its own title, description, canonical, Open Graph and Twitter tags, JSON-LD, and readable fallback content, so crawlers and link previews work without JavaScript. It also writes `404.html` (noindex), `sitemap.xml` and `robots.txt`.
+- `src/components/layout/Seo.jsx` keeps the tags in step during in-app navigation.
+- `vercel.json` uses clean URLs, so `/about` is served from `about.html` and unknown paths return a real 404.
+- The canonical domain comes from `site.url`; override it at build time with `SITE_URL`.
+- After launch: verify the domain in Google Search Console, submit `https://www.algoriquecleaners.co.uk/sitemap.xml`, and set up a Google Business Profile for Dartford, Bexley and London.
 
 ## Images
 
