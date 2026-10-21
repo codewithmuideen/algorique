@@ -53,7 +53,7 @@ function ServicesDropdown({ item, active }) {
             animate={{ opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE } }}
             exit={{ opacity: 0, y: 6, transition: { duration: 0.2 } }}
           >
-            <div className="grid grid-cols-2 gap-1 rounded-3xl border border-ink/10 bg-white p-3 shadow-[0_24px_60px_-20px_rgba(14,42,38,0.35)]">
+            <div className="grid grid-cols-2 gap-1 rounded-3xl border border-ink/10 bg-white p-3 shadow-[0_24px_60px_-20px_rgba(11,31,68,0.35)]">
               {services.map((s) => (
                 <Link
                   key={s.id}
@@ -121,10 +121,10 @@ export function Header() {
           <div
             className={cn(
               'flex h-16 items-center justify-between gap-4 rounded-2xl bg-white/95 pr-2 pl-4 backdrop-blur-xl transition-shadow duration-500 sm:pl-5 lg:h-[76px] lg:rounded-[20px] lg:pr-3 lg:pl-7',
-              scrolled ? 'shadow-[0_14px_40px_-16px_rgba(14,42,38,0.35)]' : 'shadow-[0_6px_24px_-12px_rgba(14,42,38,0.2)]',
+              scrolled ? 'shadow-[0_14px_40px_-16px_rgba(11,31,68,0.35)]' : 'shadow-[0_6px_24px_-12px_rgba(11,31,68,0.2)]',
             )}
           >
-            <Logo variant="color" className="h-8 sm:h-9 lg:h-11" />
+            <Logo variant="color" className="text-[16px] sm:text-[18px] lg:text-[20px]" />
 
             <nav aria-label="Main" className="hidden lg:block">
               <ul className="flex items-center gap-1 xl:gap-3">
@@ -148,7 +148,7 @@ export function Header() {
                 to="/book"
                 className="btn btn-ink group hidden min-h-12 px-6 text-[12px] tracking-[0.08em] uppercase sm:inline-flex"
               >
-                Book a cleaning
+                Get a free quote
                 <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
               </Link>
               <button

@@ -5,8 +5,8 @@
     { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ],
-  "theme_color": "#0E2A26",
-  "background_color": "#FBFAF6",
+  "theme_color": "#0B1F44",
+  "background_color": "#F8FAFD",
   "display": "standalone",
   "start_url": "/"
 }

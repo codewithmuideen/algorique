@@ -1,7 +1,6 @@
 import { PageHero } from '../components/layout/PageHero'
 import { Reviews } from '../components/testimonials/Reviews'
 import { Gallery } from '../components/gallery/Gallery'
-import { FinalCta } from '../components/sections/FinalCta'
 import { images } from '../data/images'
 
 export default function ReviewsPage() {
@@ -15,7 +14,6 @@ export default function ReviewsPage() {
       />
       <Reviews />
       <Gallery />
-      <FinalCta />
     </>
   )
 }

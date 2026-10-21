@@ -10,19 +10,19 @@ import { services, faqs } from './content.js'
 export const routes = [
   {
     path: '/',
-    title: 'Algorique Cleaners | Cleaning Services in Dartford, Bexley & London',
+    title: 'Algorique Cleaners | Professional Cleaning Services in London',
     description:
-      'Professional cleaning for homes, properties and businesses in Dartford, Bexley and London: residential, end-of-tenancy, commercial, Airbnb, deep and after-builders cleaning. Call 020 8123 4567.',
-    heading: 'Professional cleaning services in Dartford, Bexley and London',
+      'Professional cleaning services you can trust for homes, businesses and property management across London and surrounding areas. Domestic, end-of-tenancy, commercial and Airbnb cleaning. Free quotes: 020 8058 6268.',
+    heading: 'Professional cleaning services in London and surrounding areas',
     image: '/og-image.jpg',
     priority: '1.0',
   },
   {
     path: '/services',
     name: 'Services',
-    title: 'Cleaning Services in Dartford, Bexley & London | Algorique Cleaners',
+    title: 'Cleaning Services in London | Algorique Cleaners',
     description:
-      'Residential, end-of-tenancy, commercial, Airbnb and short-let, deep and after-builders cleaning across Dartford, Bexley and London. One-off or recurring.',
+      'Domestic, end-of-tenancy, commercial, Airbnb and short-stay, deep and after-builders cleaning across London and surrounding areas, including Dartford and Bexley.',
     heading: 'Cleaning that fits your life',
     image: '/images/kitchen-island.jpg',
     priority: '0.9',
@@ -30,7 +30,7 @@ export const routes = [
   {
     path: '/book',
     name: 'Book a cleaning',
-    title: 'Book a Cleaning in Dartford, Bexley & London | Algorique Cleaners',
+    title: 'Get a Free Cleaning Quote | Algorique Cleaners London',
     description:
       'Request a clean in a couple of minutes. Choose your service, property details and preferred date, and we will confirm availability with you personally.',
     heading: 'Request your cleaning',
@@ -69,8 +69,8 @@ export const routes = [
   {
     path: '/contact',
     name: 'Contact',
-    title: 'Contact Us | Algorique Cleaners, Dartford, Bexley & London',
-    description: 'Call 020 8123 4567 or email hello@algoriquecleaners.co.uk for quotes and bookings. We cover Dartford, Bexley and London.',
+    title: 'Contact Us | Algorique Cleaners London',
+    description: 'Call 020 8058 6268, WhatsApp us or email info@algoriquecleaners.co.uk for a free quote. We cover London and surrounding areas.',
     heading: 'Let us know how we can help',
     image: '/images/team/cleaner-smiling.jpg',
     priority: '0.8',

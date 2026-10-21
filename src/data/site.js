@@ -11,19 +11,23 @@ export const site = {
   slogan: 'Your cleaning needs. Solved.™',
   promise: 'The formula for a cleaner, brighter space.',
   motto: 'Cleaner spaces. Brighter lives.',
+  trust: 'Professional cleaning services you can trust',
+  values: ['Reliable', 'Professional', 'Eco-friendly'],
+  audiences: ['Homes', 'Businesses', 'Property management'],
+  coverage: 'London and surrounding areas',
   locale: 'en-GB',
 
   // Shown publicly. The inbox that receives form submissions is set
   // separately with BUSINESS_EMAIL on the server.
-  email: 'hello@algoriquecleaners.co.uk',
-  phone: '020 8123 4567',
-  phoneHref: 'tel:+442081234567',
+  email: 'info@algoriquecleaners.co.uk',
+  phone: '020 8058 6268',
+  phoneHref: 'tel:+442080586268',
   hours: '', // e.g. 'Monday to Friday, 8am to 6pm'. Hidden while empty.
 
-  // WhatsApp Business number in international format, digits only, e.g.
-  // '447700900123'. While empty, every WhatsApp button becomes a "Call us"
-  // button using the phone number above.
-  whatsappNumber: '',
+  // WhatsApp Business number in international format, digits only. Used by
+  // every WhatsApp button and the "Scan to chat" QR code. If emptied, the
+  // buttons fall back to calling the phone number above.
+  whatsappNumber: '442080586268',
 
   // Add only profiles the business actually owns. Empty entries are hidden.
   social: {
@@ -38,9 +42,9 @@ export const site = {
   // a full district ('DA1') matches exactly; letters only ('SE') match every
   // district in that London postcode area.
   areas: [
+    { name: 'London', prefixes: ['E', 'EC', 'N', 'NW', 'SE', 'SW', 'W', 'WC'] },
     { name: 'Dartford', prefixes: ['DA1', 'DA2', 'DA3', 'DA4', 'DA9', 'DA10'] },
     { name: 'Bexley', prefixes: ['DA5', 'DA6', 'DA7', 'DA8', 'DA14', 'DA15', 'DA16', 'DA17', 'DA18'] },
-    { name: 'London', prefixes: ['E', 'EC', 'N', 'NW', 'SE', 'SW', 'W', 'WC'] },
   ],
 
   // If trading as a limited company, set its registered name and number here.

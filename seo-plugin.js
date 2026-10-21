@@ -40,22 +40,22 @@ function bodyHtml(route) {
     if (lines.length) extra.push(`<p>${lines.join('<br />')}</p>`)
   }
   return `
-      <div style="max-width:1100px;margin:0 auto;padding:120px 24px 80px;font-family:Poppins,system-ui,sans-serif;color:#0e2a26;line-height:1.6">
-        <nav aria-label="Main"><a href="/" style="font-weight:700;color:#0e2a26">${esc(site.name)}</a> ${navLinks
-          .map((r) => `<a href="${r.path}" style="margin-left:16px;color:#1c6c54">${esc(r.name || 'Home')}</a>`)
+      <div style="max-width:1100px;margin:0 auto;padding:120px 24px 80px;font-family:Poppins,system-ui,sans-serif;color:#0b1f44;line-height:1.6">
+        <nav aria-label="Main"><a href="/" style="font-weight:700;color:#0b1f44">${esc(site.name)}</a> ${navLinks
+          .map((r) => `<a href="${r.path}" style="margin-left:16px;color:#0b4fb3">${esc(r.name || 'Home')}</a>`)
           .join('')}</nav>
         <main>
           <h1 style="font-size:40px;line-height:1.1;margin:48px 0 16px">${esc(route.heading)}</h1>
-          <p style="max-width:640px;color:#5d6862">${esc(route.description)}</p>
+          <p style="max-width:640px;color:#586379">${esc(route.description)}</p>
           ${extra.join('\n          ')}
-          <p><a href="/book" style="color:#1c6c54;font-weight:600">Book a cleaning</a></p>
+          <p><a href="/book" style="color:#0b4fb3;font-weight:600">Book a cleaning</a></p>
         </main>
       </div>`
 }
 
 function render(template, route, base) {
   let head = headHtml(route, base)
-  if (route.path === '/') head += '\n    <link rel="preload" as="image" href="/images/team/hero-cleaner-cutout.webp" fetchpriority="high" />'
+  if (route.path === '/') head += '\n    <link rel="preload" as="image" href="/images/living-white-sofa.jpg" fetchpriority="high" />'
   return template.replace(/<!-- seo:head[^>]*-->/, head).replace('<!-- seo:body -->', bodyHtml(route))
 }
 

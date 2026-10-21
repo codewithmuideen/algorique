@@ -2,7 +2,6 @@ import { PageHero } from '../components/layout/PageHero'
 import { ServiceList } from '../components/services/ServiceList'
 import { SignatureShowcase } from '../components/services/SignatureShowcase'
 import { Process } from '../components/sections/Process'
-import { FinalCta } from '../components/sections/FinalCta'
 import { images } from '../data/images'
 
 export default function ServicesPage() {
@@ -17,7 +16,6 @@ export default function ServicesPage() {
       <ServiceList />
       <SignatureShowcase />
       <Process />
-      <FinalCta />
     </>
   )
 }

@@ -3,7 +3,6 @@ import { Process } from '../components/sections/Process'
 import { SignatureShowcase } from '../components/services/SignatureShowcase'
 import { WhyUs } from '../components/sections/WhyUs'
 import { Faq } from '../components/sections/Faq'
-import { FinalCta } from '../components/sections/FinalCta'
 import { images } from '../data/images'
 
 export default function ProcessPage() {
@@ -20,7 +19,6 @@ export default function ProcessPage() {
       <SignatureShowcase />
       <WhyUs />
       <Faq />
-      <FinalCta />
     </>
   )
 }

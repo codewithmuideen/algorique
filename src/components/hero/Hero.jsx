@@ -1,153 +1,249 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { ArrowUpRight, Phone, ShieldCheck, ScanLine, Home, Building2, DoorOpen, KeyRound } from 'lucide-react'
 import { images } from '../../data/images'
+import { services } from '../../data/content'
 import { site } from '../../data/site'
-import { EASE } from '../../lib/motion'
+import { hasWhatsapp } from '../../lib/whatsapp'
+import { WhatsAppQr } from '../forms/WhatsAppQr'
+import { EASE, cn } from '../../lib/motion'
 
-const word = {
+const line = {
   hidden: { y: '110%' },
-  show: (i) => ({ y: '0%', transition: { duration: 1.3, ease: EASE, delay: 0.7 + i * 0.12 } }),
+  show: (i) => ({ y: '0%', transition: { duration: 1.2, ease: EASE, delay: 0.55 + i * 0.12 } }),
 }
 
-function HeroCard({ to, label, tone, delay }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.1, ease: EASE, delay }}
-    >
-      <Link
-        to={to}
-        className={`group flex size-32 flex-col justify-between rounded-[20px] p-4 shadow-[0_20px_40px_-20px_rgba(14,42,38,0.5)] transition-transform duration-500 hover:-translate-y-1 xl:size-36 ${
-          tone === 'lime' ? 'bg-lime text-ink' : 'bg-white text-ink'
-        }`}
-      >
-        <span className="text-[12px] leading-tight font-semibold tracking-[0.06em] uppercase">{label}</span>
-        <ArrowRight className="size-5 self-end transition-transform duration-500 group-hover:translate-x-1" aria-hidden />
-      </Link>
-    </motion.div>
-  )
-}
+const fadeUp = (delay) => ({
+  initial: { opacity: 0, y: 24, filter: 'blur(6px)' },
+  animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  transition: { duration: 1, ease: EASE, delay },
+})
+
+// The four headline services shown under the hero, as on the flyer.
+const strip = [
+  { id: 'residential', icon: Home, title: 'Domestic cleaning', sub: 'Regular and deep cleaning' },
+  { id: 'commercial', icon: Building2, title: 'Commercial cleaning', sub: 'Offices, shops and workspaces' },
+  { id: 'tenancy', icon: DoorOpen, title: 'End-of-tenancy cleaning', sub: 'Move in, move out, landlord ready' },
+  { id: 'airbnb', icon: KeyRound, title: 'Airbnb & short-stay', sub: 'Fast turnaround, reliable service' },
+].filter((s) => services.some((x) => x.id === s.id))
 
 export function Hero() {
   const ref = useRef(null)
-  const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const personY = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-35%'])
-
-  // The cut-out drifts gently toward the cursor.
-  const mx = useMotionValue(0)
-  const sx = useSpring(mx, { stiffness: 50, damping: 18 })
-  useEffect(() => {
-    if (reduce || !window.matchMedia('(pointer: fine)').matches) return
-    const onMove = (e) => mx.set((e.clientX / window.innerWidth - 0.5) * -24)
-    window.addEventListener('pointermove', onMove, { passive: true })
-    return () => window.removeEventListener('pointermove', onMove)
-  }, [reduce, mx])
+  const photoY = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
+  const copyY = useTransform(scrollYProgress, [0, 1], ['0%', '-18%'])
 
   return (
     <section ref={ref} id="top" aria-labelledby="hero-title" className="bg-paper p-2 sm:p-3">
       <motion.div
-        className="on-dark relative isolate h-[calc(100svh-1rem)] min-h-[640px] overflow-hidden rounded-[26px] text-ivory sm:h-[calc(100svh-1.5rem)] lg:min-h-[720px] lg:rounded-[36px]"
-        style={{ background: 'linear-gradient(180deg, #b9e2cf 0%, #7fc2a6 30%, #3f8f72 62%, #17503f 100%)' }}
-        initial={{ clipPath: 'inset(6% 6% 6% 6% round 48px)' }}
+        className="on-dark relative isolate flex min-h-[760px] overflow-hidden rounded-[26px] bg-ink text-white lg:h-[calc(100svh-1.5rem)] lg:max-h-[960px] lg:min-h-[720px] lg:rounded-[36px]"
+        initial={{ clipPath: 'inset(5% 5% 5% 5% round 48px)' }}
         animate={{ clipPath: 'inset(0% 0% 0% 0% round 0px)' }}
-        transition={{ duration: 1.5, ease: EASE }}
+        transition={{ duration: 1.4, ease: EASE }}
       >
-        {/* Soft light from the top and fine grain */}
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_10%,rgba(255,255,255,0.55),transparent_70%)]" aria-hidden />
-        <div className="grain absolute inset-0 -z-10 opacity-[0.07] mix-blend-overlay" aria-hidden />
+        {/* Photograph: top band on mobile, right side on desktop */}
+        <motion.div
+          className="absolute inset-x-0 top-0 -z-20 h-[44svh] lg:inset-y-0 lg:right-0 lg:left-auto lg:h-full lg:w-[70%]"
+          style={{ y: photoY }}
+        >
+          <motion.img
+            src={images.heroRoom.src}
+            alt={images.heroRoom.alt}
+            width={images.heroRoom.width}
+            height={images.heroRoom.height}
+            fetchpriority="high"
+            className="h-full w-full object-cover object-[62%_60%]"
+            initial={{ scale: 1.2 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2.2, ease: EASE }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/25 via-transparent to-transparent lg:from-white/10" aria-hidden />
+        </motion.div>
 
-        {/* Lime ribbon, drawn behind the cleaner */}
-        <svg className="absolute inset-0 -z-10 h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden>
+        {/* Navy wave: from the left on desktop, from below on mobile */}
+        <svg
+          className="absolute inset-y-0 left-0 -z-10 hidden h-full w-[60%] lg:block"
+          viewBox="0 0 1000 1000"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <path d="M0 0H760C650 190 900 340 760 540C640 710 820 860 690 1000H0Z" fill="var(--color-forest)" />
+          <path d="M0 0H700C590 190 840 340 700 540C580 710 760 860 630 1000H0Z" fill="var(--color-ink)" />
           <motion.path
-            d="M180 -20C230 160 330 300 520 330C700 360 760 250 900 250C1060 250 1120 420 1200 520C1260 600 1300 640 1460 640"
+            d="M760 0C650 190 900 340 760 540C640 710 820 860 690 1000"
+            fill="none"
             stroke="var(--color-lime)"
-            strokeWidth="16"
-            strokeLinecap="round"
+            strokeWidth="5"
+            vectorEffect="non-scaling-stroke"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 2.4, ease: EASE, delay: 0.6 }}
+            transition={{ duration: 2.2, ease: EASE, delay: 0.5 }}
+          />
+        </svg>
+        <svg
+          className="absolute inset-x-0 top-[37svh] bottom-0 -z-10 w-full lg:hidden"
+          viewBox="0 0 400 600"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <path d="M0 20C120 -5 260 45 400 10V600H0Z" fill="var(--color-forest)" />
+          <path d="M0 35C120 10 260 60 400 25V600H0Z" fill="var(--color-ink)" />
+          <motion.path
+            d="M0 20C120 -5 260 45 400 10"
+            fill="none"
+            stroke="var(--color-lime)"
+            strokeWidth="4"
+            vectorEffect="non-scaling-stroke"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, ease: EASE, delay: 0.5 }}
           />
         </svg>
 
-        {/* The cleaner */}
-        <motion.div className="absolute inset-x-0 bottom-0 -z-10 flex justify-center" style={{ y: personY, x: sx }}>
-          <motion.img
-            src={images.heroCutout.src}
-            alt={images.heroCutout.alt}
-            width={images.heroCutout.width}
-            height={images.heroCutout.height}
-            fetchpriority="high"
-            className="h-[50svh] max-h-[760px] w-auto max-w-none translate-x-[6%] object-contain sm:h-[66svh] lg:h-[80svh]"
-            initial={{ opacity: 0, y: 80, scale: 1.04 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.6, ease: EASE, delay: 0.35 }}
-          />
-        </motion.div>
-
-        {/* Bottom shade so the headline always reads */}
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent" aria-hidden />
-
-        <motion.div className="container-x relative flex h-full flex-col pt-28 pb-6 sm:pt-32 lg:pb-8" style={{ y: textY }}>
-          <div className="flex flex-1 flex-col justify-start gap-5 pt-2 sm:gap-8 lg:flex-row lg:items-center lg:justify-between lg:pt-0">
-            <motion.div
-              initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 1.2, ease: EASE, delay: 1.0 }}
+        <motion.div
+          className="container-x relative flex w-full flex-col justify-start pt-[46svh] pb-36 sm:pb-40 lg:justify-center lg:pt-28 lg:pb-32"
+          style={{ y: copyY }}
+        >
+          <div className="max-w-xl lg:max-w-[46%] xl:max-w-[40rem]">
+            <motion.p
+              {...fadeUp(0.4)}
+              className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-semibold tracking-[0.04em] text-white/85 sm:text-sm"
             >
-              <p className="mb-3 inline-flex rounded-full bg-ink px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.12em] text-lime uppercase">
-                {site.slogan}
-              </p>
-              <p className="max-w-[19rem] text-[15px] leading-relaxed font-medium text-ink sm:max-w-xs sm:text-base lg:max-w-sm lg:text-white lg:drop-shadow-[0_1px_8px_rgba(14,42,38,0.35)]">
-                The formula for a cleaner, brighter space. Professional cleaning for homes, properties and businesses across
-                Dartford, Bexley and London.
-              </p>
-            </motion.div>
+              {site.audiences.map((a, i) => (
+                <span key={a} className="flex items-center gap-3">
+                  {i > 0 && <span className="h-3.5 w-px bg-lime" aria-hidden />}
+                  {a}
+                </span>
+              ))}
+            </motion.p>
 
-            <div className="hidden gap-3 lg:flex">
-              <HeroCard to="/services" label="Our services" tone="white" delay={1.15} />
-              <HeroCard to="/book" label="Book a cleaning" tone="lime" delay={1.25} />
-            </div>
-
-            <motion.div
-              className="flex gap-2 lg:hidden"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: EASE, delay: 1.1 }}
-            >
-              <Link to="/book" className="btn btn-lime min-h-11 px-5 text-[13px]">
-                Book a cleaning
-              </Link>
-              <Link to="/services" className="btn min-h-11 bg-ink px-5 text-[13px] text-ivory">
-                Our services
-              </Link>
-            </motion.div>
-          </div>
-
-          <h1 id="hero-title" className="relative text-white">
-            <span className="sr-only">Algorique Cleaners: professional cleaning services in Dartford, Bexley and London</span>
-            <span aria-hidden className="flex flex-col text-[clamp(4rem,19vw,7rem)] leading-[0.9] font-semibold tracking-[-0.055em] sm:flex-row sm:gap-[0.24em] sm:text-[clamp(4rem,11vw,12.5rem)]">
-              {['Cleaner', 'Spaces.'].map((w, i) => (
-                <span key={w} className="block overflow-hidden pb-[0.06em]">
-                  <motion.span
-                    className="block"
-                    custom={i}
-                    variants={word}
-                    initial="hidden"
-                    animate="show"
-                  >
-                    {w}
+            <h1 id="hero-title" className="mt-5 text-[clamp(2.5rem,4.6vw,4.9rem)] leading-[1.04] font-bold tracking-[-0.035em] lg:whitespace-nowrap">
+              {['A cleaner space.', 'A brighter you.'].map((t, i) => (
+                <span key={t} className="relative block overflow-hidden pb-[0.08em]">
+                  <motion.span className="block" custom={i} variants={line} initial="hidden" animate="show">
+                    {i === 1 ? (
+                      <>
+                        A <span className="relative inline-block">
+                          brighter you.
+                          <svg className="absolute -bottom-[0.12em] left-0 h-[0.28em] w-full overflow-visible" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden>
+                            <motion.path
+                              d="M4 14C70 4 190 2 296 9"
+                              fill="none"
+                              stroke="var(--color-lime)"
+                              strokeWidth="6"
+                              strokeLinecap="round"
+                              vectorEffect="non-scaling-stroke"
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 1, ease: EASE, delay: 1.3 }}
+                            />
+                          </svg>
+                        </span>
+                      </>
+                    ) : (
+                      t
+                    )}
                   </motion.span>
                 </span>
               ))}
-            </span>
-          </h1>
+            </h1>
+
+            <motion.p {...fadeUp(1.0)} className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-base font-semibold sm:text-lg">
+              {site.values.map((v) => (
+                <span key={v} className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-lime" aria-hidden />
+                  {v}
+                </span>
+              ))}
+            </motion.p>
+            <motion.p {...fadeUp(1.1)} className="mt-3 max-w-md text-[15px] leading-relaxed text-white/75 sm:text-base">
+              {site.trust} for homes, businesses and property managers across London and surrounding areas.
+            </motion.p>
+
+            <motion.div {...fadeUp(1.2)} className="mt-8 flex flex-wrap gap-3">
+              <Link to="/book" className="btn btn-lime group min-h-13 px-7">
+                Get a free quote
+                <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
+              </Link>
+              <a href={site.phoneHref} className="btn btn-ghost-light min-h-13 px-6">
+                <Phone className="size-4" aria-hidden /> {site.phone}
+              </a>
+            </motion.div>
+          </div>
         </motion.div>
+
+        {/* Floating cards over the photograph (desktop) */}
+        <motion.div
+          className="absolute top-32 right-8 hidden items-center gap-3 rounded-2xl bg-white/90 p-3 pr-5 text-ink shadow-[0_20px_50px_-20px_rgba(11,31,68,0.5)] backdrop-blur-md lg:flex xl:right-12"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.1, ease: EASE, delay: 1.3 }}
+        >
+          <span className="grid size-11 place-items-center rounded-xl bg-forest text-white">
+            <ShieldCheck className="size-5" aria-hidden />
+          </span>
+          <span className="text-[13px] leading-tight font-semibold">
+            {site.trust}
+            <span className="mt-0.5 block font-medium text-stone">Vetted, trained and professional team</span>
+          </span>
+        </motion.div>
+
+        {hasWhatsapp && (
+          <motion.div
+            className="absolute right-8 bottom-32 hidden items-center gap-4 rounded-[22px] bg-white p-3 pr-5 text-ink shadow-[0_24px_60px_-24px_rgba(11,31,68,0.6)] lg:flex xl:right-12"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: EASE, delay: 1.45 }}
+          >
+            <WhatsAppQr className="size-24" />
+            <span className="max-w-[9rem] text-[13px] leading-snug">
+              <span className="flex items-center gap-1.5 font-semibold">
+                <ScanLine className="size-4 text-forest" aria-hidden /> Scan to chat
+              </span>
+              <span className="mt-1 block text-stone">Open a WhatsApp chat with us in seconds.</span>
+            </span>
+          </motion.div>
+        )}
       </motion.div>
+
+      {/* Service strip overlapping the bottom of the hero */}
+      <div className="container-x relative z-10 -mt-24 sm:-mt-28">
+        <motion.ul
+          className="grid grid-cols-2 gap-2 rounded-[24px] bg-white p-2 shadow-[0_30px_70px_-30px_rgba(11,31,68,0.45)] sm:gap-3 sm:p-3 lg:grid-cols-4 lg:rounded-[28px]"
+          initial="hidden"
+          animate="show"
+          variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 1.2 } } }}
+        >
+          {strip.map((s, i) => {
+            const Icon = s.icon
+            return (
+              <motion.li
+                key={s.id}
+                variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } } }}
+              >
+                <Link
+                  to={`/services#${s.id}`}
+                  className="group flex h-full flex-col items-center gap-3 rounded-[18px] p-4 text-center transition-colors duration-300 hover:bg-mist sm:flex-row sm:items-center sm:text-left lg:p-5"
+                >
+                  <span
+                    className={cn(
+                      'grid size-12 shrink-0 place-items-center rounded-full text-white ring-4 transition-transform duration-500 group-hover:-translate-y-1 sm:size-14',
+                      i % 2 ? 'bg-lime-2 ring-lime/20' : 'bg-forest ring-forest/15',
+                    )}
+                  >
+                    <Icon className="size-6" strokeWidth={1.8} aria-hidden />
+                  </span>
+                  <span>
+                    <span className="block text-[14px] leading-tight font-semibold text-ink sm:text-[15px]">{s.title}</span>
+                    <span className="mt-1 block text-[12px] leading-snug text-stone sm:text-[13px]">{s.sub}</span>
+                  </span>
+                </Link>
+              </motion.li>
+            )
+          })}
+        </motion.ul>
+      </div>
     </section>
   )
 }

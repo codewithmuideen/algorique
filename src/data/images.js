@@ -7,6 +7,7 @@ const img = (file, alt, width, height) => ({ src: `/images/${file}`, alt, width,
 
 export const images = {
   // Interiors and details (Unsplash)
+  heroRoom: img('living-white-sofa.jpg', 'Bright, freshly cleaned living room with a light sofa and large windows', 2400, 1350),
   hero: img('hero-living.jpg', 'Sunlit living room with large windows, a grey sofa and leather chairs', 2200, 1160),
   gloveWipe: img('detail-glove-wipe.jpg', 'Gloved hand wiping a white worktop with a cloth', 1400, 933),
   gloveSpray: img('detail-glove-spray.jpg', 'Gloved hand holding a spray bottle', 1400, 933),

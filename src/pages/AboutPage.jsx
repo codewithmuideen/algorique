@@ -4,7 +4,6 @@ import { Formula } from '../components/sections/Formula'
 import { WhyUs } from '../components/sections/WhyUs'
 import { Gallery } from '../components/gallery/Gallery'
 import { Areas } from '../components/sections/Areas'
-import { FinalCta } from '../components/sections/FinalCta'
 import { images } from '../data/images'
 
 export default function AboutPage() {
@@ -22,7 +21,6 @@ export default function AboutPage() {
       <WhyUs showLink={false} />
       <Gallery />
       <Areas />
-      <FinalCta />
     </>
   )
 }

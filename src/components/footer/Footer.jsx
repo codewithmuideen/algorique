@@ -37,9 +37,9 @@ export function Footer() {
       <div className="container-x pt-20 pb-10 sm:pt-28">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo variant="dark" className="h-10 sm:h-12" />
+            <Logo variant="light" className="text-[24px] sm:text-[28px]" />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-ivory/65">
-              {site.promise} Professional cleaning for homes, properties and businesses across Dartford, Bexley and London.
+              {site.trust} for homes, businesses and property management across London and surrounding areas.
             </p>
             <p className="mt-4 text-sm font-semibold tracking-[0.12em] text-lime uppercase">{site.slogan}
             </p>

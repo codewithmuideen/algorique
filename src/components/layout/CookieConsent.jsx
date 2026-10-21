@@ -45,7 +45,7 @@ export function CookieConsent() {
             animate={{ opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } }}
             exit={{ opacity: 0, y: 40, transition: { duration: 0.35 } }}
           >
-            <div className="flex flex-col gap-5 rounded-[24px] border border-ink/10 bg-white p-5 shadow-[0_30px_80px_-24px_rgba(14,42,38,0.5)] sm:p-6 lg:flex-row lg:items-center lg:gap-8 lg:p-7">
+            <div className="flex flex-col gap-5 rounded-[24px] border border-ink/10 bg-white p-5 shadow-[0_30px_80px_-24px_rgba(11,31,68,0.5)] sm:p-6 lg:flex-row lg:items-center lg:gap-8 lg:p-7">
               <div className="flex gap-4">
                 <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-lime">
                   <Cookie className="size-6 text-ink" aria-hidden />

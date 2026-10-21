@@ -60,11 +60,11 @@ The hero cut-out (`public/images/team/hero-cleaner-cutout.webp`) was made from t
 
 ## Business details and what is still to fill in
 
-Real details are set in `src/data/site.js`: phone 020 8123 4567, hello@algoriquecleaners.co.uk, www.algoriquecleaners.co.uk, areas Dartford, Bexley and London (with postcode districts for the checker), and the brand lines. Empty or `[bracketed]` fields are hidden automatically.
+Real details are set in `src/data/site.js`: phone and WhatsApp 020 8058 6268, info@algoriquecleaners.co.uk, www.algoriquecleaners.co.uk, coverage London and surrounding areas (London, Dartford and Bexley postcode districts power the checker), and the brand lines. Empty or `[bracketed]` fields are hidden automatically.
 
 Still to complete before launch:
 
-- **`whatsappNumber`** in `site.js`: while empty, every WhatsApp button shows "Call 020 8123 4567" instead.
+- **`whatsappNumber`** in `site.js` is set to 020 8058 6268 (442080586268). Make sure that number is registered on WhatsApp or WhatsApp Business. The "Scan to chat" QR code is generated from it automatically.
 - **`hours`**, **`social`** links, and **`legalName` / `companyNumber`** if trading as a limited company.
 - **Reviews** in `src/data/content.js`: three visibly labelled placeholders. Replace them with genuine reviews used with permission.
 - **Gallery**: illustrative stock photography (labelled on the page). Replace it with real job photos. Add `before` to an item for a before/after slider.
@@ -91,10 +91,11 @@ To swap a photo, drop the new file in `public/images/` and update its entry in `
 
 ## Brand
 
-- Logos are in `public/brand/`: `logo-color.png` for light backgrounds, `logo-dark-bg.png` (ivory and lime) for dark backgrounds, `logo-white.png`, and the "A" mark in forest and lime. `social-avatar.png` is sized for social profiles.
-- The favicon, Apple touch icon, 512px icon and the 1200×630 `og-image.jpg` sit in `public/`.
-- Colours: ink `#0E2A26`, forest `#1C6C54`, lime `#C8F252`, ivory `#F5F2EA`, paper `#FBFAF6`, mist `#E8EEE6`. They are defined as tokens in `src/styles/index.css`.
-- Type: Poppins throughout (300 to 700), self-hosted through Fontsource, so no third party is contacted on page load.
+- **Logo:** a vector redraw of the Algorique house-and-leaf mark (`src/components/layout/BrandMark.jsx`) with the wordmark set in Poppins Bold. The header, footer and menu render it as SVG, so it stays sharp at every size. The original uploads are kept as `public/brand/algorique_*.png`.
+- **Raster versions** rendered from the vector logo: `public/brand/logo-color.png`, `logo-white.png`, `mark-color.png`, `mark-white.png` and `social-avatar.png`, plus `favicon.png`, `apple-touch-icon.png`, `icon-512.png` and the 1200×630 `og-image.jpg` in `public/`.
+- **Colours:** navy `#0B1F44`, royal blue `#0B4FB3`, leaf green `#6CC24A` (darker `#58AE36`), cool white `#F8FAFD` and light blue `#EBF2FB`. They are defined as tokens in `src/styles/index.css`.
+- **Type:** Poppins throughout (300 to 700), self-hosted through Fontsource, so no third party is contacted on page load.
+- **WhatsApp QR:** `src/components/forms/WhatsAppQr.jsx` generates the code from `whatsappNumber` in `site.js`, so it always matches the configured number. It appears in the hero on desktop and in the quote banner on every page. On phones a "Chat on WhatsApp" button replaces it.
 
 ## Cookies and analytics
 

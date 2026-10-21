@@ -77,7 +77,7 @@ export function ServiceList() {
                     sizes="(min-width: 1024px) 45vw, 100vw"
                   />
                   <span
-                    className="pointer-events-none absolute -top-3 right-4 bg-gradient-to-b from-white to-white/0 bg-clip-text text-[clamp(5rem,9vw,8.5rem)] leading-none font-semibold tracking-tighter text-transparent drop-shadow-[0_4px_18px_rgba(14,42,38,0.25)] sm:-top-6"
+                    className="pointer-events-none absolute -top-3 right-4 bg-gradient-to-b from-white to-white/0 bg-clip-text text-[clamp(5rem,9vw,8.5rem)] leading-none font-semibold tracking-tighter text-transparent drop-shadow-[0_4px_18px_rgba(11,31,68,0.25)] sm:-top-6"
                     aria-hidden
                   >
                     {String(i + 1).padStart(2, '0')}

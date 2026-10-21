@@ -52,7 +52,7 @@ export function MobileMenu({ onClose }) {
       transition={{ duration: 0.8, ease: EASE }}
     >
       <div className="container-x flex h-[76px] shrink-0 items-center justify-between pt-3">
-        <Logo variant="dark" className="h-7" onClick={onClose} />
+        <Logo variant="light" className="text-[16px]" onClick={onClose} />
         <button
           ref={closeRef}
           type="button"
@@ -96,7 +96,7 @@ export function MobileMenu({ onClose }) {
         transition={{ duration: 0.9, delay: 0.55, ease: EASE }}
       >
         <Link to="/book" onClick={onClose} className="btn btn-lime w-full">
-          Book a Cleaning <ArrowUpRight className="size-4" aria-hidden />
+          Get a free quote <ArrowUpRight className="size-4" aria-hidden />
         </Link>
         <ChatButton className="btn btn-ghost-light w-full" />
         <a href={`mailto:${site.email}`} className="pt-3 text-center text-sm text-ivory/60">

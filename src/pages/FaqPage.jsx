@@ -1,6 +1,5 @@
 import { PageHero } from '../components/layout/PageHero'
 import { Faq } from '../components/sections/Faq'
-import { FinalCta } from '../components/sections/FinalCta'
 import { images } from '../data/images'
 
 export default function FaqPage() {
@@ -13,7 +12,6 @@ export default function FaqPage() {
         image={images.bathroomWood}
       />
       <Faq />
-      <FinalCta />
     </>
   )
 }

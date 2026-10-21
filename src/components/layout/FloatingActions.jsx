@@ -47,7 +47,7 @@ export function FloatingActions() {
             type="button"
             onClick={scrollTop}
             aria-label="Back to top"
-            className="group fixed right-6 bottom-6 z-40 hidden size-14 place-items-center rounded-full bg-white text-ink shadow-[0_10px_30px_-10px_rgba(14,42,38,0.45)] lg:grid"
+            className="group fixed right-6 bottom-6 z-40 hidden size-14 place-items-center rounded-full bg-white text-ink shadow-[0_10px_30px_-10px_rgba(11,31,68,0.45)] lg:grid"
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
@@ -72,7 +72,7 @@ export function FloatingActions() {
             exit={{ y: 100, opacity: 0, transition: { duration: 0.35 } }}
           >
             <Link to="/book" className="btn btn-lime min-h-12 flex-1">
-              Book a Cleaning <ArrowUpRight className="size-4" aria-hidden />
+              Get a free quote <ArrowUpRight className="size-4" aria-hidden />
             </Link>
             <button
               type="button"

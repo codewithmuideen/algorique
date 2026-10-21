@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { MaskImage } from '../animation/MaskImage'
 import { Reveal, RevealGroup, RevealItem } from '../animation/Reveal'
 import { images } from '../../data/images'
+import { BrandMark } from '../layout/BrandMark'
 
 const statement =
   'We clean homes and workplaces the way we would want our own looked after: carefully, consistently, and to a standard you can check.'
@@ -41,29 +42,29 @@ function ScrollStatement() {
 function RotatingBadge() {
   const reduce = useReducedMotion()
   return (
-    <motion.div
-      className="grid size-32 place-items-center rounded-full bg-lime text-ink sm:size-36"
-      animate={reduce ? {} : { rotate: 360 }}
-      transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
-      aria-hidden
-    >
-      <svg viewBox="0 0 100 100" className="size-full">
+    <div className="relative grid size-32 place-items-center rounded-full bg-white text-ink shadow-[0_18px_40px_-18px_rgba(11,31,68,0.45)] sm:size-36" aria-hidden>
+      <motion.svg
+        viewBox="0 0 100 100"
+        className="absolute inset-0 size-full"
+        animate={reduce ? {} : { rotate: 360 }}
+        transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+      >
         <defs>
           <path id="badge-circle" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" />
         </defs>
-        <text className="fill-current text-[9.6px] font-bold tracking-[0.2em] uppercase">
-          <textPath href="#badge-circle">Algorique · Careful cleaning · Algorique ·</textPath>
+        <text className="fill-current text-[9px] font-bold tracking-[0.2em] uppercase">
+          <textPath href="#badge-circle">Cleaner spaces · Brighter lives · </textPath>
         </text>
-        <image href="/brand/mark-forest.png" x="33" y="33" width="34" height="34" />
-      </svg>
-    </motion.div>
+      </motion.svg>
+      <BrandMark className="w-[38%]" />
+    </div>
   )
 }
 
 const principles = [
   ['Written checklists', 'Room-by-room, agreed with you, followed every visit.'],
   ['Care for your surfaces', 'The right method for stone, timber, glass and fabric.'],
-  ['Clear communication', 'Easy to reach on 020 8123 4567 or by email, before and after every visit.'],
+  ['Clear communication', 'Easy to reach by phone, WhatsApp or email, before and after every visit.'],
 ]
 
 export function About({ showLink = false }) {
@@ -85,8 +86,8 @@ export function About({ showLink = false }) {
           <div className="flex flex-col justify-between gap-10 lg:col-span-4 lg:pt-24">
             <Reveal delay={0.1}>
               <p className="text-lg leading-relaxed text-stone">
-                Algorique Cleaners provides professional cleaning for homes, properties and businesses across Dartford, Bexley
-                and London. From a weekly tidy to an Airbnb turnover or a full move-out reset, the standard comes from vetted,
+                Algorique Cleaners provides professional cleaning for homes, businesses and property managers across London
+                and surrounding areas. From a weekly tidy to an Airbnb turnover or a full move-out reset, the standard comes from vetted,
                 trained people, professional eco-friendly products and a proven process of checklists and quality inspections.
               </p>
             </Reveal>

@@ -6,6 +6,7 @@ import { FloatingActions } from './FloatingActions'
 import { CookieConsent } from './CookieConsent'
 import { scrollToSection } from '../../lib/scroll'
 import { Seo } from './Seo'
+import { QuoteBanner } from '../sections/QuoteBanner'
 
 // New page: start at the top. Link to "/#section": scroll to that section,
 // even if it is the same hash clicked twice.
@@ -58,6 +59,7 @@ export function Layout() {
       <main id="main">
         <Outlet />
       </main>
+      <QuoteBanner />
       <Footer />
       <FloatingActions />
       <CookieConsent />

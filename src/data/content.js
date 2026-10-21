@@ -5,8 +5,8 @@ import { images } from './images.js'
 export const services = [
   {
     id: 'residential',
-    title: 'Residential cleaning',
-    short: 'Weekly, fortnightly or monthly upkeep',
+    title: 'Domestic cleaning',
+    short: 'Regular and deep cleaning for homes',
     description:
       'The same high standard every visit. Kitchens, bathrooms and living spaces stay consistently clean, so nothing builds up between one visit and the next.',
     includes: ['Kitchen and bathroom surfaces', 'Vacuuming and mopping', 'Dusting reachable surfaces', 'Bins emptied and relined'],
@@ -16,7 +16,7 @@ export const services = [
   {
     id: 'tenancy',
     title: 'End-of-tenancy cleaning',
-    short: 'Move-in and move-out ready',
+    short: 'Move in, move out and landlord ready',
     description:
       'A thorough, room-by-room clean for tenants, landlords and letting agents, prepared with the check-out inventory in mind.',
     includes: ['Inside cupboards and drawers', 'Kitchen appliances inside and out', 'Bathrooms descaled and polished', 'Floors, skirting and interior glass'],
@@ -26,7 +26,7 @@ export const services = [
   {
     id: 'commercial',
     title: 'Commercial cleaning',
-    short: 'Offices, shops and shared spaces',
+    short: 'Offices, shops and workspaces',
     description:
       'Offices, retail units and communal areas cleaned on a schedule that works around your business, before you open or after you close.',
     includes: ['Desks and shared surfaces', 'Meeting rooms and breakout areas', 'Kitchens, bins and recycling', 'Washrooms cleaned and restocked'],
@@ -35,8 +35,8 @@ export const services = [
   },
   {
     id: 'airbnb',
-    title: 'Airbnb & short-let cleaning',
-    short: 'Guest-ready between every stay',
+    title: 'Airbnb & short-stay cleaning',
+    short: 'Fast turnaround and reliable service',
     description:
       'Fast, reliable turnovers between guests for hosts and property managers, so every check-in feels fresh, spotless and five-star ready.',
     includes: ['Full clean between guests', 'Beds made with fresh linen', 'Kitchen and bathroom reset', 'Essentials checked before check-in'],
@@ -75,7 +75,7 @@ export const formula = [
   {
     icon: 'products',
     label: 'The right products',
-    body: 'Professional, eco-friendly cleaning solutions, chosen for every surface.',
+    body: 'Professional cleaning solutions for every surface, with eco-friendly products on request.',
   },
   {
     icon: 'process',
@@ -118,28 +118,34 @@ export const signature = [
 // Add claims such as "Fully insured" only once the business has confirmed them.
 export const reasons = [
   {
+    icon: 'shield',
+    title: 'Vetted, trained and professional team',
+    body: 'Every cleaner is vetted and trained before they visit, and works to the same high standard.',
+  },
+  {
+    icon: 'sparkles',
+    title: 'High cleaning standards',
+    body: 'Documented checklists and quality inspections, so nothing is missed and every visit is consistent.',
+  },
+  {
+    icon: 'leaf',
+    title: 'Eco-friendly products',
+    body: 'Professional products as standard, with eco-friendly options available on request.',
+  },
+  {
     icon: 'calendar',
-    title: 'Reliable scheduling',
-    body: 'A fixed day and arrival window for regular visits, and a heads-up from us if anything has to change.',
-    points: ['Agreed arrival windows', 'Advance notice of any change'],
+    title: 'Flexible appointments',
+    body: 'One-off or recurring, weekdays or weekends, at times that suit your home or business.',
   },
   {
-    icon: 'map',
-    title: 'Local to you',
-    body: 'Professional cleaning for homes, properties and businesses across Dartford, Bexley and London.',
-    points: ['Dartford, Bexley and London', 'Homes, lets and businesses'],
+    icon: 'pound',
+    title: 'Competitive prices',
+    body: 'A free, clear quote before any work starts, based on your property and the work involved.',
   },
   {
-    icon: 'repeat',
-    title: 'Flexible plans',
-    body: 'Book one-off, weekly, fortnightly or monthly, and change the plan when your routine does.',
-    points: ['One-off or recurring', 'Pause or change easily'],
-  },
-  {
-    icon: 'receipt',
-    title: 'Clear, upfront quotes',
-    body: 'You will know the price before we start, based on your property and the work involved, not on surprises.',
-    points: ['Quote before any work', 'No hidden extras'],
+    icon: 'building',
+    title: 'Homes, offices and letting agents',
+    body: 'Trusted by homeowners, businesses, landlords and property managers across London.',
   },
 ]
 
@@ -160,12 +166,12 @@ export const faqs = [
     a: 'Send a booking request with your service, property details and preferred date and time. It is a request, not a confirmed booking. We check availability and contact you to confirm before anything is scheduled.',
   },
   {
-    q: 'How are prices calculated?',
-    a: 'Prices depend on the service, the size and condition of the property, how often you would like us to visit, and any extras. We give you a clear quote before any work begins.',
+    q: 'How much does a clean cost?',
+    a: 'Prices depend on the service, the size and condition of the property, how often you would like us to visit, and any extras. Quotes are free, and you will have a clear price before any work begins.',
   },
   {
     q: 'Do I need to supply cleaning products?',
-    a: 'No. We bring professional, eco-friendly cleaning products and equipment. If you would like particular products used, for example because of allergies or surfaces that need special care, add a note when you book.',
+    a: 'No. We bring professional cleaning products and equipment, and eco-friendly products are available on request. If you would like particular products used, for example because of allergies or surfaces that need special care, add a note when you book.',
   },
   {
     q: 'Can I reschedule a booking?',
@@ -173,11 +179,11 @@ export const faqs = [
   },
   {
     q: 'Which locations do you cover?',
-    a: 'We clean homes, properties and businesses across Dartford, Bexley and London. You can check your postcode on our contact page. If you are just outside these areas, get in touch and we will tell you whether we can help.',
+    a: 'We clean homes, properties and businesses across London and the surrounding areas, including Dartford and Bexley. You can check your postcode on our contact page. If you are not sure, get in touch and we will tell you whether we can help.',
   },
   {
-    q: 'Do you clean Airbnb and short-let properties?',
-    a: 'Yes. We provide turnover cleans between guests for hosts and property managers, with beds made, kitchens and bathrooms reset, and essentials checked before the next check-in.',
+    q: 'Do you clean Airbnb and short-stay properties?',
+    a: 'Yes. We provide fast, reliable turnover cleans between guests for hosts, letting agents and property managers, with beds made, kitchens and bathrooms reset, and essentials checked before the next check-in.',
   },
   {
     q: 'Do I need to be home during the clean?',

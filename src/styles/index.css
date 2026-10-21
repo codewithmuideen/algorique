@@ -1,19 +1,19 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-ink: #0e2a26;
-  --color-ink-2: #133730;
-  --color-ink-3: #1a443b;
-  --color-forest: #1c6c54;
-  --color-forest-2: #24876a;
-  --color-lime: #c8f252;
-  --color-lime-2: #b6e43a;
-  --color-ivory: #f5f2ea;
-  --color-paper: #fbfaf6;
-  --color-sage: #cfdccc;
-  --color-mist: #e8eee6;
-  --color-charcoal: #1e2421;
-  --color-stone: #5d6862;
+  --color-ink: #0b1f44;
+  --color-ink-2: #112a5a;
+  --color-ink-3: #1b3a73;
+  --color-forest: #0b4fb3;
+  --color-forest-2: #1662d4;
+  --color-lime: #6cc24a;
+  --color-lime-2: #58ae36;
+  --color-ivory: #f4f7fc;
+  --color-paper: #f8fafd;
+  --color-sage: #d5e3f4;
+  --color-mist: #ebf2fb;
+  --color-charcoal: #172036;
+  --color-stone: #586379;
 
   --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
@@ -77,10 +77,7 @@
     @apply font-display leading-[1.08] font-medium tracking-[-0.035em];
   }
   /* Accent words in headings: colour only, no italics */
-  .display em,
-  h1 em,
-  h2 em,
-  h3 em {
+  em {
     font-style: normal;
   }
   .btn {

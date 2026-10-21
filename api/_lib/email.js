@@ -44,32 +44,32 @@ export function renderEmail({ heading, intro, sections, submittedAt, siteUrl }) 
       .map(
         ([label, value]) => `
         <tr>
-          <td style="padding:10px 0;border-bottom:1px solid #e8eee6;width:38%;vertical-align:top;color:#5d6862;font-size:14px;">${escapeHtml(label)}</td>
-          <td style="padding:10px 0;border-bottom:1px solid #e8eee6;vertical-align:top;color:#0e2a26;font-size:14px;font-weight:600;white-space:pre-wrap;">${escapeHtml(value || 'Not provided')}</td>
+          <td style="padding:10px 0;border-bottom:1px solid #e4ecf7;width:38%;vertical-align:top;color:#586379;font-size:14px;">${escapeHtml(label)}</td>
+          <td style="padding:10px 0;border-bottom:1px solid #e4ecf7;vertical-align:top;color:#0b1f44;font-size:14px;font-weight:600;white-space:pre-wrap;">${escapeHtml(value || 'Not provided')}</td>
         </tr>`,
       )
       .join('')
 
   const html = `<!doctype html>
-<html><body style="margin:0;background:#f5f2ea;font-family:Arial,Helvetica,sans-serif;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f5f2ea;padding:24px 12px;">
+<html><body style="margin:0;background:#f4f7fc;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f7fc;padding:24px 12px;">
     <tr><td align="center">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;">
-        <tr><td style="background:#0e2a26;padding:28px 32px;">
-          <p style="margin:0;color:#c8f252;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;">Algorique Cleaners</p>
-          <h1 style="margin:8px 0 0;color:#f5f2ea;font-size:24px;font-weight:normal;">${escapeHtml(heading)}</h1>
+        <tr><td style="background:#0b1f44;padding:28px 32px;">
+          <p style="margin:0;color:#6cc24a;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;">Algorique Cleaners</p>
+          <h1 style="margin:8px 0 0;color:#f4f7fc;font-size:24px;font-weight:normal;">${escapeHtml(heading)}</h1>
         </td></tr>
-        <tr><td style="padding:24px 32px 8px;color:#1e2421;font-size:15px;line-height:1.5;">${escapeHtml(intro)}</td></tr>
+        <tr><td style="padding:24px 32px 8px;color:#172036;font-size:15px;line-height:1.5;">${escapeHtml(intro)}</td></tr>
         ${sections
           .map(
             (s) => `
         <tr><td style="padding:16px 32px 0;">
-          <h2 style="margin:0 0 4px;color:#1c6c54;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;">${escapeHtml(s.title)}</h2>
+          <h2 style="margin:0 0 4px;color:#0b4fb3;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;">${escapeHtml(s.title)}</h2>
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows(s.items)}</table>
         </td></tr>`,
           )
           .join('')}
-        <tr><td style="padding:24px 32px 28px;color:#5d6862;font-size:12px;line-height:1.5;">
+        <tr><td style="padding:24px 32px 28px;color:#586379;font-size:12px;line-height:1.5;">
           Submitted ${escapeHtml(submittedAt)}${siteUrl ? ` via ${escapeHtml(siteUrl)}` : ''}.<br/>
           Reply to this email to respond to the customer directly.
         </td></tr>
