@@ -40,7 +40,7 @@ function bodyHtml(route) {
     if (lines.length) extra.push(`<p>${lines.join('<br />')}</p>`)
   }
   return `
-      <div style="max-width:1100px;margin:0 auto;padding:120px 24px 80px;font-family:Poppins,system-ui,sans-serif;color:#0b1f44;line-height:1.6">
+      <div class="seo-fallback">
         <nav aria-label="Main"><a href="/" style="font-weight:700;color:#0b1f44">${esc(site.name)}</a> ${navLinks
           .map((r) => `<a href="${r.path}" style="margin-left:16px;color:#0b4fb3">${esc(r.name || 'Home')}</a>`)
           .join('')}</nav>
@@ -55,7 +55,13 @@ function bodyHtml(route) {
 
 function render(template, route, base) {
   let head = headHtml(route, base)
-  if (route.path === '/') head += '\n    <link rel="preload" as="image" href="/images/living-white-sofa.jpg" fetchpriority="high" />'
+  if (route.path === '/') {
+    // Responsive preload: phones fetch the 800px hero, larger screens the full one.
+    head +=
+      '\n    <link rel="preload" as="image" href="/images/living-white-sofa.webp"' +
+      ' imagesrcset="/images/living-white-sofa-800.webp 800w, /images/living-white-sofa.webp 2000w"' +
+      ' imagesizes="(min-width: 1024px) 70vw, 100vw" fetchpriority="high" />'
+  }
   return template.replace(/<!-- seo:head[^>]*-->/, head).replace('<!-- seo:body -->', bodyHtml(route))
 }
 
@@ -70,6 +76,11 @@ export function seoPlugin() {
     transformIndexHtml: {
       order: 'post',
       handler(html, ctx) {
+        // Preload the Latin Nunito font file so text renders without waiting on CSS.
+        const font = ctx.bundle && Object.keys(ctx.bundle).find((f) => /nunito-latin-wght-normal.*\.woff2$/.test(f))
+        if (font) {
+          html = html.replace('</head>', `  <link rel="preload" as="font" type="font/woff2" href="/${font}" crossorigin />\n  </head>`)
+        }
         template = html
         const url = ctx.originalUrl || '/'
         const pathname = new URL(url, 'http://localhost').pathname

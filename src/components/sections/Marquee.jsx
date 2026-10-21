@@ -49,7 +49,7 @@ export function Marquee({ speed = 2.2 }) {
           </span>
           {i % 2 === 1 ? (
             <img
-              src={thumbs[(i >> 1) % thumbs.length].src}
+              src={thumbs[(i >> 1) % thumbs.length].thumb}
               alt=""
               loading="lazy"
               className="h-14 w-24 rounded-full object-cover sm:h-20 sm:w-36"

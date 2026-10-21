@@ -91,10 +91,12 @@ To swap a photo, drop the new file in `public/images/` and update its entry in `
 
 ## Brand
 
-- **Logo:** a vector redraw of the Algorique house-and-leaf mark (`src/components/layout/BrandMark.jsx`) with the wordmark set in Poppins Bold. The header, footer and menu render it as SVG, so it stays sharp at every size. The original uploads are kept as `public/brand/algorique_*.png`.
+- **Logo:** a vector redraw of the Algorique house-and-leaf mark (`src/components/layout/BrandMark.jsx`) with the wordmark set in Nunito Black, the closest match to the original logo lettering. The header, footer and menu render it as SVG, so it stays sharp at every size. The original uploads are kept as `public/brand/algorique_*.png`.
 - **Raster versions** rendered from the vector logo: `public/brand/logo-color.png`, `logo-white.png`, `mark-color.png`, `mark-white.png` and `social-avatar.png`, plus `favicon.png`, `apple-touch-icon.png`, `icon-512.png` and the 1200×630 `og-image.jpg` in `public/`.
 - **Colours:** navy `#0B1F44`, royal blue `#0B4FB3`, leaf green `#6CC24A` (darker `#58AE36`), cool white `#F8FAFD` and light blue `#EBF2FB`. They are defined as tokens in `src/styles/index.css`.
-- **Type:** Poppins throughout (300 to 700), self-hosted through Fontsource, so no third party is contacted on page load.
+- **Type:** Nunito (variable font, one file) throughout, self-hosted through Fontsource and preloaded, so no third party is contacted on page load.
+- **Loading:** a branded splash screen (inline in `index.html`) shows the logo until the font, the first page's code and the home hero photo are ready, then fades out (`src/main.jsx`, never longer than 3.5 seconds). The crawler fallback text in each page's HTML is visually hidden.
+- **Images:** photos are served as WebP in an 800px and a full-size version (`name-800.webp`, `name.webp`); browsers pick the right one. When adding a photo, convert it the same way (the JPG is kept for social previews).
 - **WhatsApp QR:** `src/components/forms/WhatsAppQr.jsx` generates the code from `whatsappNumber` in `site.js`, so it always matches the configured number. It appears in the hero on desktop and in the quote banner on every page. On phones a "Chat on WhatsApp" button replaces it.
 
 ## Cookies and analytics

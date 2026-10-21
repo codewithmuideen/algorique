@@ -26,6 +26,8 @@ export function FinalCta() {
       >
         <motion.img
           src={images.kitchenIsland.src}
+          srcSet={images.kitchenIsland.srcSet}
+          sizes="100vw"
           alt=""
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover"

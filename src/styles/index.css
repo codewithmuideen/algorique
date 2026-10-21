@@ -15,8 +15,8 @@
   --color-charcoal: #172036;
   --color-stone: #586379;
 
-  --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Nunito Variable', 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Nunito Variable', 'Nunito', ui-sans-serif, system-ui, sans-serif;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
@@ -74,7 +74,7 @@
     @apply inline-block h-[7px] w-[7px] rounded-full bg-current;
   }
   .display {
-    @apply font-display leading-[1.08] font-medium tracking-[-0.035em];
+    @apply font-display leading-[1.08] font-extrabold tracking-[-0.025em];
   }
   /* Accent words in headings: colour only, no italics */
   em {

@@ -103,6 +103,8 @@ export function SignatureShowcase() {
               >
                 <motion.img
                   src={item.image.src}
+                  srcSet={item.image.srcSet}
+                  sizes="(min-width: 1024px) 58vw, 100vw"
                   alt={item.image.alt}
                   width={item.image.width}
                   height={item.image.height}
@@ -124,7 +126,7 @@ export function SignatureShowcase() {
                 animate={{ opacity: 1, y: 0, rotate: -2, transition: { duration: 1, delay: 0.45, ease: EASE } }}
                 exit={{ opacity: 0, y: 20, transition: { duration: 0.3 } }}
               >
-                <img src={item.detail.src} alt={item.detail.alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                <img src={item.detail.thumb} alt={item.detail.alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
               </motion.div>
             </AnimatePresence>
 

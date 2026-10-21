@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import QRCode from 'qrcode'
 import { BrandMark } from '../layout/BrandMark'
 import { whatsappUrl } from '../../lib/whatsapp'
 
@@ -13,12 +12,13 @@ export function WhatsAppQr({ className = 'size-40', message = QR_MESSAGE }) {
 
   useEffect(() => {
     let alive = true
-    QRCode.toString(url, {
+    // Loaded on demand so the QR library is not part of the first page download.
+    import('qrcode').then(({ default: QRCode }) => QRCode.toString(url, {
       type: 'svg',
       errorCorrectionLevel: 'H',
       margin: 0,
       color: { dark: '#0b1f44', light: '#ffffff' },
-    }).then((s) => alive && setSvg(s.replace('<svg ', '<svg width="100%" height="100%" ')))
+    })).then((s) => alive && setSvg(s.replace('<svg ', '<svg width="100%" height="100%" ')))
     return () => {
       alive = false
     }

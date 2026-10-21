@@ -53,13 +53,13 @@ export function BrandMark({ tone = 'color', className, title }) {
   )
 }
 
-// Full lockup: mark + two-line wordmark set in Poppins.
+// Full lockup: mark + two-line wordmark set in Nunito Black.
 export function BrandLockup({ tone = 'color', className = '', markClassName = 'h-full w-auto' }) {
   const light = tone === 'light'
   return (
     <span className={`inline-flex items-center gap-[0.32em] leading-none select-none ${className}`}>
       <BrandMark tone={tone} className={markClassName} />
-      <span className="flex flex-col font-bold tracking-[-0.025em]">
+      <span className="flex flex-col font-black tracking-[-0.015em]">
         <span className={light ? 'text-white' : 'text-[#0B3D9C]'}>Algorique</span>
         <span className={light ? 'text-[#7ACB4C]' : 'text-[#3E9B22]'}>Cleaners</span>
       </span>

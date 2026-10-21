@@ -98,6 +98,8 @@ export function Lightbox({ items, index, onIndex, onClose }) {
             ) : (
               <img
                 src={item.image.src}
+                srcSet={item.image.srcSet}
+                sizes="90vw"
                 alt={item.image.alt}
                 draggable="false"
                 className="max-h-[calc(100svh-12rem)] w-auto max-w-full rounded-[20px] object-contain select-none"
@@ -162,9 +164,11 @@ function CompareSlider({ before, after }) {
       }}
       onPointerMove={(e) => e.buttons === 1 && fromPointer(e)}
     >
-      <img src={after.src} alt={`After: ${after.alt}`} className="absolute inset-0 h-full w-full object-cover" draggable="false" />
+      <img src={after.src} srcSet={after.srcSet} sizes="90vw" alt={`After: ${after.alt}`} className="absolute inset-0 h-full w-full object-cover" draggable="false" />
       <img
         src={before.src}
+        srcSet={before.srcSet}
+        sizes="90vw"
         alt={`Before: ${before.alt}`}
         className="absolute inset-0 h-full w-full object-cover"
         style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}

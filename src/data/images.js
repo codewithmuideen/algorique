@@ -3,7 +3,18 @@
 // /images/team/*  : photos supplied by the business.
 // /images/*       : Unsplash photography (free for commercial use), stored locally.
 
-const img = (file, alt, width, height) => ({ src: `/images/${file}`, alt, width, height })
+// Each photo is served as WebP in two sizes (800px wide and full width, max
+// 2000px); browsers pick the smaller one on phones. The original .jpg/.webp
+// files are produced by converting the JPG in /public/images (see README).
+// `jpg` keeps the original for social previews.
+const img = (file, alt, width, height) => {
+  const base = `/images/${file.replace(/\.(jpe?g|png|webp)$/i, '')}`
+  const full = Math.min(width, 2000)
+  const h = Math.round((height * full) / width)
+  const srcSet = full > 800 ? `${base}-800.webp 800w, ${base}.webp ${full}w` : `${base}.webp ${full}w`
+  const thumb = full > 800 ? `${base}-800.webp` : `${base}.webp`
+  return { src: `${base}.webp`, srcSet, thumb, jpg: `/images/${file}`, alt, width: full, height: h }
+}
 
 export const images = {
   // Interiors and details (Unsplash)

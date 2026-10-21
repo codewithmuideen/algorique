@@ -134,6 +134,8 @@ function ServicePanel({ service, i, shift }) {
     >
       <motion.img
         src={service.image.src}
+        srcSet={service.image.srcSet}
+        sizes="44vw"
         alt={service.image.alt}
         width={service.image.width}
         height={service.image.height}
@@ -223,6 +225,8 @@ function SwipeCarousel() {
               <div className="relative aspect-[4/3]">
                 <img
                   src={s.image.src}
+                  srcSet={s.image.srcSet}
+                  sizes="(min-width: 640px) 58vw, 84vw"
                   alt={s.image.alt}
                   width={s.image.width}
                   height={s.image.height}

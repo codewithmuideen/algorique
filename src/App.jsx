@@ -5,17 +5,39 @@ import { Layout } from './components/layout/Layout'
 import { BookingProvider } from './components/booking/BookingContext'
 import Home from './pages/Home'
 
-const AboutPage = lazy(() => import('./pages/AboutPage'))
-const ServicesPage = lazy(() => import('./pages/ServicesPage'))
-const ProcessPage = lazy(() => import('./pages/ProcessPage'))
-const ReviewsPage = lazy(() => import('./pages/ReviewsPage'))
-const ContactPage = lazy(() => import('./pages/ContactPage'))
-const BookPage = lazy(() => import('./pages/BookPage'))
-const FaqPage = lazy(() => import('./pages/FaqPage'))
-const Privacy = lazy(() => import('./pages/Privacy'))
-const Terms = lazy(() => import('./pages/Terms'))
-const Cookies = lazy(() => import('./pages/Cookies'))
-const NotFound = lazy(() => import('./pages/NotFound'))
+// Page code is split per route. The same loaders are used to preload the
+// first page before the splash screen is removed (see main.jsx).
+const loaders = {
+  '/about': () => import('./pages/AboutPage'),
+  '/services': () => import('./pages/ServicesPage'),
+  '/process': () => import('./pages/ProcessPage'),
+  '/reviews': () => import('./pages/ReviewsPage'),
+  '/contact': () => import('./pages/ContactPage'),
+  '/book': () => import('./pages/BookPage'),
+  '/faq': () => import('./pages/FaqPage'),
+  '/privacy': () => import('./pages/Privacy'),
+  '/terms': () => import('./pages/Terms'),
+  '/cookies': () => import('./pages/Cookies'),
+}
+const notFoundLoader = () => import('./pages/NotFound')
+
+export const preloadRoute = (pathname) => {
+  const path = pathname.replace(/\/+$/, '') || '/'
+  if (path === '/') return Promise.resolve()
+  return (loaders[path] ?? notFoundLoader)()
+}
+
+const AboutPage = lazy(loaders['/about'])
+const ServicesPage = lazy(loaders['/services'])
+const ProcessPage = lazy(loaders['/process'])
+const ReviewsPage = lazy(loaders['/reviews'])
+const ContactPage = lazy(loaders['/contact'])
+const BookPage = lazy(loaders['/book'])
+const FaqPage = lazy(loaders['/faq'])
+const Privacy = lazy(loaders['/privacy'])
+const Terms = lazy(loaders['/terms'])
+const Cookies = lazy(loaders['/cookies'])
+const NotFound = lazy(notFoundLoader)
 
 export default function App() {
   return (

@@ -49,6 +49,8 @@ export function Hero() {
         >
           <motion.img
             src={images.heroRoom.src}
+            srcSet={images.heroRoom.srcSet}
+            sizes="(min-width: 1024px) 70vw, 100vw"
             alt={images.heroRoom.alt}
             width={images.heroRoom.width}
             height={images.heroRoom.height}
@@ -108,45 +110,49 @@ export function Hero() {
           <div className="max-w-xl lg:max-w-[46%] xl:max-w-[40rem]">
             <motion.p
               {...fadeUp(0.4)}
-              className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-semibold tracking-[0.04em] text-white/85 sm:text-sm"
+              className="inline-flex max-w-full items-center gap-2.5 rounded-full bg-white/[0.07] px-3.5 py-1.5 text-[12px] font-semibold whitespace-nowrap text-white/90 ring-1 ring-white/12 backdrop-blur-sm sm:gap-3 sm:px-4 sm:text-[13px]"
             >
               {site.audiences.map((a, i) => (
-                <span key={a} className="flex items-center gap-3">
-                  {i > 0 && <span className="h-3.5 w-px bg-lime" aria-hidden />}
+                <span key={a} className="flex items-center gap-2.5 sm:gap-3">
+                  {i > 0 && <span className="size-1 rounded-full bg-lime" aria-hidden />}
                   {a}
                 </span>
               ))}
             </motion.p>
 
-            <h1 id="hero-title" className="mt-5 text-[clamp(2.5rem,4.6vw,4.9rem)] leading-[1.04] font-bold tracking-[-0.035em] lg:whitespace-nowrap">
-              {['A cleaner space.', 'A brighter you.'].map((t, i) => (
-                <span key={t} className="relative block overflow-hidden pb-[0.08em]">
-                  <motion.span className="block" custom={i} variants={line} initial="hidden" animate="show">
-                    {i === 1 ? (
-                      <>
-                        A <span className="relative inline-block">
-                          brighter you.
-                          <svg className="absolute -bottom-[0.12em] left-0 h-[0.28em] w-full overflow-visible" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden>
-                            <motion.path
-                              d="M4 14C70 4 190 2 296 9"
-                              fill="none"
-                              stroke="var(--color-lime)"
-                              strokeWidth="6"
-                              strokeLinecap="round"
-                              vectorEffect="non-scaling-stroke"
-                              initial={{ pathLength: 0 }}
-                              animate={{ pathLength: 1 }}
-                              transition={{ duration: 1, ease: EASE, delay: 1.3 }}
-                            />
-                          </svg>
-                        </span>
-                      </>
-                    ) : (
-                      t
-                    )}
-                  </motion.span>
-                </span>
-              ))}
+            <h1 id="hero-title" className="mt-5 text-[clamp(2.4rem,4.6vw,4.9rem)] leading-[1.06] font-extrabold tracking-[-0.03em]">
+              <span className="block overflow-hidden pb-[0.06em]">
+                <motion.span className="block" custom={0} variants={line} initial="hidden" animate="show">
+                  A cleaner space.
+                </motion.span>
+              </span>
+              {/* Extra room around the second line so the drawn circle is not clipped */}
+              <span className="-mx-[0.35em] -my-[0.22em] block overflow-hidden px-[0.35em] py-[0.22em]">
+                <motion.span className="block whitespace-nowrap" custom={1} variants={line} initial="hidden" animate="show">
+                  A{' '}
+                  <span className="relative ml-[0.14em] inline-block">
+                    brighter you.
+                    <svg
+                      className="pointer-events-none absolute -top-[0.16em] -left-[0.22em] h-[calc(100%+0.3em)] w-[calc(100%+0.44em)] overflow-visible"
+                      viewBox="0 0 400 120"
+                      preserveAspectRatio="none"
+                      aria-hidden
+                    >
+                      <motion.path
+                        d="M118 18C190 4 318 6 374 34C404 50 400 82 364 98C300 120 150 120 74 108C22 100 4 80 12 58C22 30 80 16 150 12"
+                        fill="none"
+                        stroke="var(--color-lime)"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        vectorEffect="non-scaling-stroke"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ pathLength: { duration: 1.2, ease: EASE, delay: 1.4 }, opacity: { duration: 0.2, delay: 1.4 } }}
+                      />
+                    </svg>
+                  </span>
+                </motion.span>
+              </span>
             </h1>
 
             <motion.p {...fadeUp(1.0)} className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-base font-semibold sm:text-lg">

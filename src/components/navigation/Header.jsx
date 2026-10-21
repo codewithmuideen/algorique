@@ -60,7 +60,7 @@ function ServicesDropdown({ item, active }) {
                   to={`/services#${s.id}`}
                   className="group flex items-center gap-3 rounded-2xl p-2.5 transition-colors hover:bg-mist"
                 >
-                  <img src={s.image.src} alt="" loading="lazy" className="size-12 shrink-0 rounded-xl object-cover" />
+                  <img src={s.image.thumb} alt="" loading="lazy" className="size-12 shrink-0 rounded-xl object-cover" />
                   <span>
                     <span className="block text-[13px] leading-tight font-semibold text-ink">{s.title}</span>
                     <span className="mt-0.5 block text-[11px] text-stone">{s.short}</span>

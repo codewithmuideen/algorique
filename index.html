@@ -14,8 +14,76 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <link rel="manifest" href="/site.webmanifest?v=2" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <style>
+      /* Splash screen: shown instantly, removed by src/main.jsx once the page is ready */
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background: #f8fafd;
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+      }
+      #splash.is-done {
+        opacity: 0;
+        visibility: hidden;
+      }
+      #splash .splash-inner {
+        display: grid;
+        justify-items: center;
+        gap: 22px;
+      }
+      #splash .splash-mark {
+        width: 88px;
+        height: auto;
+        animation: splash-breathe 1.6s ease-in-out infinite;
+      }
+      #splash .splash-bar {
+        position: relative;
+        width: 120px;
+        height: 3px;
+        overflow: hidden;
+        border-radius: 3px;
+        background: #e1e9f5;
+      }
+      #splash .splash-bar::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        width: 40%;
+        border-radius: 3px;
+        background: linear-gradient(90deg, #0b4fb3, #6cc24a);
+        animation: splash-slide 1.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+      }
+      @keyframes splash-breathe {
+        50% { transform: scale(1.06); }
+      }
+      @keyframes splash-slide {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(250%); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #splash .splash-mark, #splash .splash-bar::after { animation: none; }
+      }
+      /* Crawler-readable fallback content: in the HTML, never painted */
+      .seo-fallback {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+    </style>
   </head>
   <body>
+    <div id="splash" role="status" aria-label="Loading Algorique Cleaners">
+      <div class="splash-inner">
+        <svg class="splash-mark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 800"><defs><linearGradient id="splash-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1559C9"/><stop offset="1" stop-color="#0A3A91"/></linearGradient><linearGradient id="splash-g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3F9B22"/><stop offset="1" stop-color="#74C043"/></linearGradient></defs><path d="M22 455L428 48L742 362M92 425V735Q92 768 125 768H262" fill="none" stroke="url(#splash-b)" stroke-width="66" stroke-linejoin="round"/><path d="M770 230H836Q852 230 852 246V455L906 540Q918 562 900 580Q884 592 868 578L852 562V708Q852 724 836 724H770Q754 724 754 708V246Q754 230 770 230Z" fill="url(#splash-b)"/><path d="M190 59Q200.56 114.44 256 125Q200.56 135.56 190 191Q179.44 135.56 124 125Q179.44 114.44 190 59Z" fill="url(#splash-b)"/><path d="M693 66Q699.4 99.6 733 106Q699.4 112.4 693 146Q686.6 112.4 653 106Q686.6 99.6 693 66Z" fill="url(#splash-b)"/><path d="M428 254Q435.36 292.64 474 300Q435.36 307.36 428 346Q420.64 307.36 382 300Q420.64 292.64 428 254Z" fill="url(#splash-b)"/><path d="M333 304Q343.88 361.12 401 372Q343.88 382.88 333 440Q322.12 382.88 265 372Q322.12 361.12 333 304Z" fill="url(#splash-b)"/><path d="M262 722C285 540 455 412 692 404C724 590 628 770 410 792C350 798 300 778 262 722Z" fill="url(#splash-g)"/><path d="M328 778L602 548" stroke="#fff" stroke-width="20" stroke-linecap="round"/></svg>
+        <div class="splash-bar"></div>
+      </div>
+    </div>
     <div id="root"><!-- seo:body --></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

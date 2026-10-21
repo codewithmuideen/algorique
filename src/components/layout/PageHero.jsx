@@ -16,6 +16,8 @@ export function PageHero({ eyebrow, title, intro, image, imagePosition = '50% 50
       >
         <motion.img
           src={image.src}
+          srcSet={image.srcSet}
+          sizes="100vw"
           alt=""
           className="absolute inset-0 -z-10 h-full w-full object-cover"
           style={{ objectPosition: imagePosition }}

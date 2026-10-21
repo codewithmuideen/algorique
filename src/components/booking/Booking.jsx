@@ -173,7 +173,7 @@ export function Booking() {
             </ul>
 
             <div className="mt-10 hidden overflow-hidden rounded-[24px] lg:block">
-              <img src={images.handshake.src} alt={images.handshake.alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              <img src={images.handshake.src} srcSet={images.handshake.srcSet} sizes="(min-width: 1024px) 30vw, 100vw" alt={images.handshake.alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
             </div>
 
             <div className="mt-8 rounded-[24px] border border-ivory/15 p-6">
@@ -366,7 +366,7 @@ function StepService({ register, errors, values, clearErrors }) {
               className="group relative flex cursor-pointer items-center gap-3 rounded-2xl border border-ink/12 bg-white p-2.5 pr-4 transition-all duration-300 hover:border-ink/35 has-[:checked]:border-forest has-[:checked]:bg-mist has-[:checked]:ring-2 has-[:checked]:ring-forest has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-forest/30"
             >
               <input type="radio" value={s.id} className="peer sr-only" {...register('service')} />
-              <img src={s.image.src} alt="" loading="lazy" className="size-14 shrink-0 rounded-xl object-cover" />
+              <img src={s.image.thumb} alt="" loading="lazy" className="size-14 shrink-0 rounded-xl object-cover" />
               <span className="text-sm leading-tight font-semibold text-ink">{s.title}</span>
               <span className="absolute top-2 right-2 grid size-5 scale-0 place-items-center rounded-full bg-forest text-ivory transition-transform duration-300 peer-checked:scale-100">
                 <Check className="size-3" strokeWidth={3} aria-hidden />

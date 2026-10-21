@@ -47,6 +47,7 @@ export function MaskImage({
       >
         <motion.img
           src={image.src}
+          srcSet={image.srcSet}
           alt={image.alt}
           width={image.width}
           height={image.height}
