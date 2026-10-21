@@ -2,8 +2,9 @@
   "name": "Algorique Cleaners",
   "short_name": "Algorique",
   "icons": [
-    { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/favicon.svg?v=2", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/favicon.png?v=2", "sizes": "64x64", "type": "image/png" },
+    { "src": "/icon-512.png?v=2", "sizes": "512x512", "type": "image/png" }
   ],
   "theme_color": "#0B1F44",
   "background_color": "#F8FAFD",
