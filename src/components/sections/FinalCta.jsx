@@ -51,12 +51,19 @@ export function FinalCta() {
             <p className="max-w-md text-lg text-ivory/80">
               Send a booking request in a couple of minutes. We will confirm the details with you personally.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <button type="button" onClick={() => openBooking()} className="btn btn-lime group min-h-14 px-8 text-base">
-                Book a Cleaning
-                <ArrowUpRight className="size-5 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
+            <div className="flex gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={() => openBooking()}
+                className="btn btn-lime group min-h-11 gap-1.5 px-4 text-[13px] sm:min-h-14 sm:gap-2 sm:px-8 sm:text-base"
+              >
+                Get a free quote
+                <ArrowUpRight className="size-3.5 transition-transform duration-500 group-hover:rotate-45 sm:size-5" aria-hidden />
               </button>
-              <ChatButton className="btn btn-ghost-light min-h-14 px-7" />
+              <ChatButton
+                className="btn btn-ghost-light min-h-11 gap-1.5 px-4 text-[13px] sm:min-h-14 sm:gap-2 sm:px-7 sm:text-base"
+                iconClassName="size-4 sm:size-5"
+              />
             </div>
           </Reveal>
         </div>

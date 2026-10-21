@@ -13,11 +13,11 @@ export default function NotFound() {
           className="display text-[clamp(2.4rem,6vw,5rem)]"
         />
         <p className="mt-6 max-w-md text-lg text-ivory/70">The page you were looking for does not exist or has moved.</p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link to="/" className="btn btn-lime">
+        <div className="mt-10 flex gap-2 sm:gap-3">
+          <Link to="/" className="btn btn-lime min-h-11 px-4 text-[13px] sm:min-h-12 sm:px-6 sm:text-sm">
             Back to home
           </Link>
-          <Link to="/contact" className="btn btn-ghost-light">
+          <Link to="/contact" className="btn btn-ghost-light min-h-11 px-4 text-[13px] sm:min-h-12 sm:px-6 sm:text-sm">
             Contact us
           </Link>
         </div>

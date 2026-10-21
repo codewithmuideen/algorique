@@ -61,7 +61,7 @@ export const routes = [
     path: '/reviews',
     name: 'Reviews',
     title: 'Client Reviews | Algorique Cleaners',
-    description: 'What clients say about Algorique Cleaners, and the finish they come home to.',
+    description: 'Client reviews of Algorique Cleaners, the finish our clients come home to, and how to share your own experience.',
     heading: 'Real homes. Lasting results.',
     image: '/images/living-bright.jpg',
     priority: '0.6',

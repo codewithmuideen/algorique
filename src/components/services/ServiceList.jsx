@@ -58,12 +58,15 @@ export function ServiceList() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <Link to={`/book?service=${s.id}`} className="btn btn-ink group">
+                  <div className="mt-8 flex gap-2 sm:gap-3">
+                    <Link
+                      to={`/book?service=${s.id}`}
+                      className="btn btn-ink group min-h-11 gap-1.5 px-4 text-[13px] sm:min-h-12 sm:gap-2 sm:px-6 sm:text-sm"
+                    >
                       Request this service
                       <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
                     </Link>
-                    <Link to="/contact" className="btn btn-ghost-dark">
+                    <Link to="/contact" className="btn btn-ghost-dark min-h-11 px-4 text-[13px] sm:min-h-12 sm:px-6 sm:text-sm">
                       Ask a question
                     </Link>
                   </div>

@@ -547,11 +547,15 @@ function Success({ name, waMessage, onReset }) {
         Thank you. Your preferred date and time are not confirmed yet. We will check availability and contact you by email or
         phone to confirm the details.
       </p>
-      <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <button type="button" onClick={onReset} className="btn btn-ink">
-          Make another request
+      <div className="mt-8 flex justify-center gap-2 sm:gap-3">
+        <button type="button" onClick={onReset} className="btn btn-ink min-h-11 px-4 text-[13px] sm:min-h-12 sm:px-6 sm:text-sm">
+          New request
         </button>
-        <ChatButton message={waMessage} className="btn btn-ghost-dark" label={{ whatsapp: 'Follow up on WhatsApp' }} />
+        <ChatButton
+          message={waMessage}
+          className="btn btn-ghost-dark min-h-11 gap-1.5 px-4 text-[13px] sm:min-h-12 sm:px-6 sm:text-sm"
+          iconClassName="size-4 sm:size-5"
+        />
       </div>
     </div>
   )

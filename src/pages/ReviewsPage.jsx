@@ -9,7 +9,7 @@ export default function ReviewsPage() {
       <PageHero
         eyebrow="Reviews"
         title={['Real homes.', 'Lasting results.']}
-        intro="Every visit we finish is more than a quick tidy. Here is what our clients say, and the kind of finish they come home to."
+        intro="Every visit we finish is more than a quick tidy. See the kind of finish our clients come home to, and share your own experience."
         image={images.livingBright}
       />
       <Reviews />

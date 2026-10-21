@@ -155,10 +155,13 @@ export function Hero() {
               </span>
             </h1>
 
-            <motion.p {...fadeUp(1.0)} className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-base font-semibold sm:text-lg">
+            <motion.p
+              {...fadeUp(1.0)}
+              className="mt-6 flex items-center gap-x-3 text-[14px] font-semibold whitespace-nowrap sm:gap-x-4 sm:text-lg"
+            >
               {site.values.map((v) => (
-                <span key={v} className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-lime" aria-hidden />
+                <span key={v} className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="size-1.5 rounded-full bg-lime sm:size-2" aria-hidden />
                   {v}
                 </span>
               ))}
@@ -167,13 +170,13 @@ export function Hero() {
               {site.trust} for homes, businesses and property managers across London and surrounding areas.
             </motion.p>
 
-            <motion.div {...fadeUp(1.2)} className="mt-8 flex flex-wrap gap-3">
-              <Link to="/book" className="btn btn-lime group min-h-13 px-7">
+            <motion.div {...fadeUp(1.2)} className="mt-8 flex gap-2 sm:gap-3">
+              <Link to="/book" className="btn btn-lime group min-h-11 gap-1.5 px-4 text-[13px] sm:min-h-13 sm:gap-2 sm:px-7 sm:text-sm">
                 Get a free quote
-                <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:rotate-45" aria-hidden />
+                <ArrowUpRight className="size-3.5 transition-transform duration-500 group-hover:rotate-45 sm:size-4" aria-hidden />
               </Link>
-              <a href={site.phoneHref} className="btn btn-ghost-light min-h-13 px-6">
-                <Phone className="size-4" aria-hidden /> {site.phone}
+              <a href={site.phoneHref} className="btn btn-ghost-light min-h-11 gap-1.5 px-4 text-[13px] sm:min-h-13 sm:gap-2 sm:px-6 sm:text-sm">
+                <Phone className="size-3.5 sm:size-4" aria-hidden /> {site.phone}
               </a>
             </motion.div>
           </div>

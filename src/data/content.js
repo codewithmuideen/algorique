@@ -191,28 +191,13 @@ export const faqs = [
   },
 ]
 
-// PLACEHOLDERS ONLY. Replace with real reviews from real customers, quoted with
-// their permission, before launch. Placeholder entries are visibly labelled.
-export const reviews = [
-  {
-    quote: 'Placeholder review: replace with a genuine customer quote about their regular clean.',
-    name: '[Customer name]',
-    role: '[Regular home cleaning · Area]',
-    placeholder: true,
-  },
-  {
-    quote: 'Placeholder review: replace with a genuine quote from a landlord, tenant or letting agent.',
-    name: '[Customer name]',
-    role: '[End-of-tenancy · Area]',
-    placeholder: true,
-  },
-  {
-    quote: 'Placeholder review: replace with a genuine quote from a commercial client.',
-    name: '[Customer name]',
-    role: '[Office cleaning · Company]',
-    placeholder: true,
-  },
-]
+// Client reviews. Add only genuine reviews from real clients, quoted with their
+// permission (fake or invented reviews are illegal in the UK under the DMCC Act
+// 2024). While this list is empty, the site shows a "leave a review" invitation.
+// Example:
+//   { quote: 'The team were brilliant...', name: 'Sarah M.', role: 'End-of-tenancy clean, Bexley',
+//     rating: 5, source: 'Google review' },
+export const reviews = []
 
 // Gallery. `illustrative: true` marks stock photography (shown with a label).
 // For real before/after work, add `before` alongside `image` with the
