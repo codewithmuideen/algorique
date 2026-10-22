@@ -24,8 +24,8 @@ export function LegalPage({ title, intro, updated, sections }) {
         </div>
       </header>
 
-      <div className="container-x grid gap-12 py-16 sm:py-24 lg:grid-cols-12">
-        <nav aria-label="On this page" className="lg:col-span-3">
+      <div className="container-x grid grid-cols-1 gap-12 py-16 sm:py-24 lg:grid-cols-12">
+        <nav aria-label="On this page" className="min-w-0 lg:col-span-3">
           <div className="lg:sticky lg:top-28">
             <p className="mb-4 text-xs font-bold tracking-[0.2em] text-forest uppercase">On this page</p>
             <ol className="space-y-2 text-sm">
@@ -41,7 +41,7 @@ export function LegalPage({ title, intro, updated, sections }) {
           </div>
         </nav>
 
-        <div className="max-w-3xl space-y-14 lg:col-span-8 lg:col-start-5">
+        <div className="min-w-0 max-w-3xl space-y-14 lg:col-span-8 lg:col-start-5">
           {sections.map((s, i) => (
             <section key={s.title} id={slug(s.title)} className="scroll-mt-28">
               <h2 className="font-display text-[1.6rem] leading-tight text-ink">

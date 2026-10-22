@@ -141,9 +141,9 @@ export function Booking() {
 
   return (
     <section id="book" aria-labelledby="book-title" className="relative bg-ink py-24 sm:py-32">
-      <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-10">
+      <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
         {/* Left: context and reassurance */}
-        <div className="on-dark text-ivory lg:col-span-4">
+        <div className="on-dark min-w-0 text-ivory lg:col-span-4">
           <div className="lg:sticky lg:top-28">
             <Reveal>
               <p className="eyebrow mb-5 text-lime">Book a cleaning</p>
@@ -193,7 +193,7 @@ export function Booking() {
         </div>
 
         {/* Right: the wizard */}
-        <div ref={cardRef} className="scroll-mt-28 lg:col-span-8">
+        <div ref={cardRef} className="min-w-0 scroll-mt-28 lg:col-span-8">
           <div className="overflow-hidden rounded-[32px] bg-paper">
             {status === 'success' ? (
               <Success
@@ -481,9 +481,9 @@ function StepReview({ register, errors, values, onEdit }) {
       <StepHeading title="Check your request" sub="Nothing is booked until we confirm availability with you." />
       <dl className="divide-y divide-ink/10 rounded-2xl border border-ink/10 bg-white">
         {rows.map(([label, value, stepIndex]) => (
-          <div key={label} className="grid grid-cols-[minmax(0,8rem)_1fr_auto] items-start gap-4 px-4 py-3 text-sm sm:grid-cols-[11rem_1fr_auto] sm:px-5">
+          <div key={label} className="grid grid-cols-[minmax(0,6.5rem)_minmax(0,1fr)_auto] items-start gap-3 px-4 py-3 text-sm sm:grid-cols-[11rem_minmax(0,1fr)_auto] sm:gap-4 sm:px-5">
             <dt className="text-stone">{label}</dt>
-            <dd className="font-semibold break-words text-ink">{value}</dd>
+            <dd className="min-w-0 font-semibold text-ink [overflow-wrap:anywhere]">{value}</dd>
             <button
               type="button"
               onClick={() => onEdit(stepIndex)}
